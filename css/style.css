@@ -3,12 +3,63 @@
     box-sizing: border-box;
 }
 
+:root {
+    --grid-size: 50vw;
+}
+
+body {
+    display: relative;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+div#characterCreation {
+    color: blue;
+}
+
+div#gameBoard {
+    display: none;
+}
+
+.fixedContainer {
+    display: none;
+    background-color:#ddd;
+    position: fixed;
+    padding: 2em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#winnerAnnouncement {
+    display: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.pagelayout {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    grid-template-columns: 1fr;
+}
+
 h1 {
+    display: block;
+    color: black;
     text-align: center;
 }
 
 h3 {
     display: inline;
+}
+
+h3#winner-message {
+    color: black;
+}
+
+div.spacer {
+    height: 20px;
 }
 
 img {
@@ -17,23 +68,12 @@ img {
     padding: 10px;
 }
 
-body {
-    display:block;
-    background-color: whitesmoke;
-}
-
-.pagelayout {
-    display: grid;
-    text-align: center;
-    justify-content: center;
-    grid-template-columns: 1fr 3fr;
-}
-
 .tictactoeBoard {
-    display: grid;
+    display: none;
+    /* display: grid; */
     margin: 0 auto;
-    width: 450px;
-    height: 450px;
+    width: var(--grid-size);
+    height: var(--grid-size);
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
 }
@@ -67,7 +107,8 @@ input[type=button] {
 }
 
 input[type=button]#nextGame {
-    margin-top: 0;
+    text-align: center;
+    margin: 0 auto;
     display: none;
 }
 
@@ -76,8 +117,18 @@ input[type=button]:hover {
     background-color: grey;
 }
 
-div#gameStarter h3 {
+div#gameStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+
+div#gameStats h3 {
     display: block;
     padding-top: 20px;
     font-size: 30px;
+}
+
+div#playerStats {
+    display: inline-block;
 }

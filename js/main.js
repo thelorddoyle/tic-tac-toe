@@ -10,6 +10,19 @@ let currentPlayer = 'Player1'
 $( document ).ready(function() {
     console.log( "document ready!" );
 
+    const showBoard = function () {
+        $('.tictactoeBoard').fadeIn(3000).css({
+            'display': 'grid',
+        })
+    }
+
+    showBoard()
+
+    const showWinnerAnnouncement = function () {
+        $('.fixedContainer').toggle()
+    }
+
+
     const findOutPlayer = function () {
         if (turnTracker % 2 !== 0) {
             currentPlayer = 'Player1'
@@ -46,6 +59,7 @@ $( document ).ready(function() {
         currentPlayer = 'Player1';
         turnTracker = 1;
         $('.boardSquare').css({ 'backgroundImage': 'none' })
+        showWinnerAnnouncement()
     } // end of resetBoard()
 
     const startOver = function () {
@@ -53,7 +67,9 @@ $( document ).ready(function() {
     } // end of startOver()
 
     const showPlayAgainButton = function () {
-        $('input#nextGame').fadeIn()
+        $('input#nextGame').fadeIn().css({
+            'display': 'block',
+        })
     }
 
     const hidePlayAgainButton = function () {
@@ -68,9 +84,11 @@ $( document ).ready(function() {
 
             let $winnerMessage = $('<h3 id="winner-message">')
             $winnerMessage.html(`${winner} wins this game!`)
-            $('div#gameStarter').prepend($winnerMessage)
+            $('div#winnerAnnouncement').prepend($winnerMessage)
+            
         }
 
+        showWinnerAnnouncement()
         showWinner(h3node, winner, wins)
         showPlayAgainButton()
     }
@@ -100,7 +118,7 @@ $( document ).ready(function() {
             else if (squaresClicked.length === 9) {
                 let $drawMessage = $('<h3 id="winner-message">')
                 $drawMessage.html("It's a draw!")
-                $('div#gameStarter').prepend($drawMessage)
+                $('div#winnerAnnouncement').prepend($drawMessage)
                 showPlayAgainButton()
             }
 
@@ -126,7 +144,7 @@ $( document ).ready(function() {
             else if (squaresClicked.length === 9) {
                 let $drawMessage = $('<h3 id="winner-message">')
                 $drawMessage.html("It's a draw!")
-                $('div#gameStarter').prepend($drawMessage)
+                $('div#winnerAnnouncement').prepend($drawMessage)
             }
         }
     }; // end of checkIfWon()
@@ -139,10 +157,10 @@ $( document ).ready(function() {
 
         const putInSymbol = function () {
             if (currentPlayer === 'Player1') {
-                $square.css({'backgroundImage': 'url(images/x.png)'})
+                $square.css({'backgroundImage': 'url(/Users/daniel/sei/projects/tic-tac-toe/images/x.png)'})
             }
             else {
-                $square.css({'backgroundImage': 'url(images/o.png)'})
+                $square.css({'backgroundImage': 'url(/Users/daniel/sei/projects/tic-tac-toe/images/o.png)'})
             }
         }
 
@@ -169,3 +187,21 @@ $( document ).ready(function() {
     })
         
 }); // document.ready()
+
+// next actions
+
+// Allow players to customize their tokens (X, O, name, picture, etc)
+
+// do custom pictures
+
+// create a separate page where someone writes their name, chooses their player piece
+// (choose from 4 standard)
+// upload your own image & use
+
+// Get inventive with your styling, e.g. use hover effects or animations to spiff things up
+
+// 
+
+// inspo boards
+
+// https://g.co/kgs/Znz3Z8
