@@ -14,12 +14,15 @@
             <div id="symbols">
                 <div>
                     <h2>Player 1:</h2>
+                    <h3 id='player1score'>Score: 0</h3>
                     <img src="images/x.png" alt="x" class='playerImage' id='player1'>
                 </div>
                 <div>
                     <h2>Player 2:</h2>
+                    <h3 id='player2score'>Score: 0</h3>
                     <img src="images/o.png" alt="x" class='playerImage' id='player1'>
                 </div>  
+                <input type="button" id='startOver' value="Reset Entire Game">
             </div>
         </div>
         <div class='column'>
@@ -34,15 +37,14 @@
                 <div class='boardSquare' id='square7'></div>
                 <div class='boardSquare' id='square8'></div>
                 <div class='boardSquare' id='square9'></div>
-            </div>  
+            </div>
+            <div id='gameStarter'>
+                <input type="button" id="nextGame" value="Start Next Game">
+            </div>
+            
         </div>
     </div>
-    <div class="pagelayout">
-        <div class="column">
-            <input type="button" id='reset' value="Reset Board">
-            <input type="button" id='startOver' value="Reset Entire Game">
-        </div>
-    </div>
+
     
     
     <script src="js/jquery.js"></script>

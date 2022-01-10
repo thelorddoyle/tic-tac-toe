@@ -7,6 +7,16 @@ h1 {
     text-align: center;
 }
 
+h3 {
+    display: inline;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
 body {
     display:block;
     background-color: whitesmoke;
@@ -15,7 +25,6 @@ body {
 .pagelayout {
     display: grid;
     text-align: center;
-    align-items: center;
     justify-content: center;
     grid-template-columns: 1fr 3fr;
 }
@@ -39,6 +48,11 @@ body {
     align-items: center;
     justify-content: center;
     border: 1px solid black;
+    pointer-events: all;
+}
+
+.boardSquare:hover {
+    background-color: papayawhip;
 }
 
 .playerImage {
@@ -46,14 +60,24 @@ body {
 }
 
 input[type=button] {
-    margin-bottom: 20px;
+    margin-top: 40px;
     padding: 20px;
     color: black;
     border: 1px black solid;
 }
 
+input[type=button]#nextGame {
+    margin-top: 0;
+    display: none;
+}
+
 input[type=button]:hover {
-    padding: 20px;
     color: whitesmoke;
     background-color: grey;
+}
+
+div#gameStarter h3 {
+    display: block;
+    padding-top: 20px;
+    font-size: 30px;
 }
