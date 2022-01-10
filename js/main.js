@@ -98,7 +98,10 @@ $( document ).ready(function() {
             
             // TODO: Do cat animation and call it a cats game
             else if (squaresClicked.length === 9) {
-                console.log('DRAW')
+                let $drawMessage = $('<h3 id="winner-message">')
+                $drawMessage.html("It's a draw!")
+                $('div#gameStarter').prepend($drawMessage)
+                showPlayAgainButton()
             }
 
         } else {
@@ -116,12 +119,14 @@ $( document ).ready(function() {
                 player2wins++
                 disableBoardClicks()
                 announceWinner('player2score', 'Player 2', player2wins)
-
+                showPlayAgainButton()
             } 
             
             // TODO: Do cat animation and call it a cats game
             else if (squaresClicked.length === 9) {
-                console.log('DRAW')
+                let $drawMessage = $('<h3 id="winner-message">')
+                $drawMessage.html("It's a draw!")
+                $('div#gameStarter').prepend($drawMessage)
             }
         }
     }; // end of checkIfWon()
