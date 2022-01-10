@@ -1,36 +1,55 @@
+turnTracker = 1;
+let squaresClicked = []
+let squaresClickedByPlayer1 = []
+let squaresClickedByPlayer2 = []
+let currentPlayer = 'Player1'
+
 $( document ).ready(function() {
     console.log( "document ready!" );
 
-    turnTracker = 1;
+    // also inside Dom Function. simply finds out whose turn it is.
+    const findOutPlayer = function () {
+        if (turnTracker % 2 !== 0) {
+            currentPlayer = 'Player1'
+            return currentPlayer;
+        } else {
+            currentPlayer = 'Player2'
+            return currentPlayer;
+        }
+    } // end of findOutPlayer
+
+    // this function is inside the dom ready. it is simply taking the square id and passing it in to an overall list of squares 'owned' by the player
+    const isClicked = function(squareNumber) {
+        squaresClicked.push(squareNumber);
+        if (currentPlayer === 'Player1') {
+            squaresClickedByPlayer1.push(squareNumber)
+            console.log('clicked by player 1: ', squaresClickedByPlayer1)
+        } else {
+            squaresClickedByPlayer2.push(squareNumber)
+            console.log('clicked by player 2: ', squaresClickedByPlayer2)
+        }
+
+    } // end of isClicked
 
     $('.boardSquare').on('click', function () {
 
-        isClicked = $(this).data('status')
+        $square = $(this)
+        idOfSquare = $(this).attr('id');
 
-        if (isClicked === 'unclicked') {
-
-            if (turnTracker % 2 !== 0) {
-                idOfSquare = $(this).attr('id');
-                const $entry = $('<p>');
-                $entry.text('x');
-                $(this).append($entry);
-                turnTracker++
-                $(this).data('status', 'clicked')
-                $(this).data('clickedby', 'player1')
-                console.log($(this).data('clickedby'))
-                checkIfWon('player1')
+        const putInSymbol = function (squareToChange) {
+            if (currentPlayer === 'Player1') {
+                $square.css({'backgroundImage': 'url(images/x.png)'})
             }
             else {
-                idOfSquare = $(this).attr('id');
-                const $entry = $('<p>');
-                $entry.text('o');
-                $(this).append($entry);
-                turnTracker++
-                $(this).data('status', 'clicked')
-                $(this).data('clickedby', 'player2')
-                console.log($(this).data('clickedby'))
-                checkIfWon('player2')
-            };
+                $square.css({'backgroundImage': 'url(images/o.png)'})
+            }
+        }
+
+        if ((squaresClicked.includes(idOfSquare) === false)) {
+            turnTracker++
+            putInSymbol(idOfSquare);
+            isClicked(idOfSquare)
+            checkIfWon(findOutPlayer())
         } else {
             console.log('Already clicked this square!')
         }
