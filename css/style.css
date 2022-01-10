@@ -1,0 +1,29 @@
+* {
+    border: 0px red solid;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+    position: relative;
+}
+
+.tictactoeBoard {
+    display: grid;
+    margin: 0 auto;
+    width: 75%;
+    height: 500px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .boardSquare {
+    display: flex;
+    background-color: antiquewhite;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+  }
