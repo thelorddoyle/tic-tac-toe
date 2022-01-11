@@ -1,6 +1,8 @@
 * {
-    border: 0px red solid;
     box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    border: 0px red solid;
 }
 
 :root {
@@ -13,11 +15,37 @@ body {
     background-color: whitesmoke;
 }
 
-div#characterCreation {
-    color: blue;
+div#charCreation {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    margin: 0 auto;
+    width: 50vw;
+    height: 50vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#charCreationTitle {
+    display: none;
+}
+
+#nameDiv {
+    display: none;
+}
+
+#nameSubmit, #nameInput, #dobSubmit, #dobInput {
+    padding: 5px;
+    margin: 0px;
 }
 
 div#gameBoard {
+    display: none;
+}
+
+#chooseLogo {
     display: none;
 }
 

@@ -5,12 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="/Users/daniel/sei/projects/tic-tac-toe/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <div id='charCreation'>
+
+    <h1 id='charCreationTitle' class='gameWelcome'>Tic-Tac-Zodiac</h1>
+
+    <div id='nameDiv'>
+
+        <label for="playerName">Your name:</label>
+        <div class="spacer"></div>
+
+        <input id='nameInput' name="playerName" type="text" placeholder="Your name here">
+        <input id='nameSubmit' type="button" value="Submit">
     
+    </div>
+
+    <div id='chooseLogo'>
+        <h1 class='logoSelectionWelcome'></h1>
+        <div class='logoSelectionWelcome'>
+
+            <div class="spacer"></div>
+            <label for="playerDOB">Your birthdate:</label>
+            <div class="spacer"></div>
+    
+            <input id='dobInput' name="playerDOB" type="date">
+            <input id='dobSubmit' type="button" value="Which Zodiac am I?">
+        
+        </div>
+        
+    </div>
+
 </div>
+
 <div id='gameBoard'>
     <wrapper class='fixedContainer'>
         <div id='winnerAnnouncement'><div class='spacer'></div>
@@ -36,11 +65,11 @@
                 </div>
                 <div class="playerStats">
                     <h3 id='player1score'>Score: 0</h3>
-                    <img src="/Users/daniel/sei/projects/tic-tac-toe/images/x.png" alt="x" class='playerImage' id='player1'>
+                    <img src="/images/x.png" alt="x" class='playerImage' id='player1'>
                 </div>
                 <div class="playerStats">
                     <h3 id='player2score'>Score: 0</h3>
-                    <img src="/Users/daniel/sei/projects/tic-tac-toe/images/o.png" alt="x" class='playerImage' id='player1'>
+                    <img src="/images/o.png" alt="x" class='playerImage' id='player1'>
                 </div>  
                 
             </div>
@@ -50,7 +79,7 @@
 
     
     
-    <script src="/Users/daniel/sei/projects/tic-tac-toe/js/jquery.js"></script>
-    <script src="/Users/daniel/sei/projects/tic-tac-toe/js/main.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

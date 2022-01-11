@@ -6,9 +6,125 @@ let squaresClickedByPlayer2 = [];
 let player1wins = 0;
 let player2wins = 0;
 let currentPlayer = 'Player1'
+let player1name = ''
+let player1dobStringArray = []
+let player1dob = []
+let player1starSign = ''
+let player1Image = ''
 
 $( document ).ready(function() {
     console.log( "document ready!" );
+
+    const player1dobFunct = function() {
+        player1dob = player1dobStringArray.map(Number)
+    }; // end of player1dobFunct
+
+    const whichZodiacSign = function (player) {
+
+        const applyImage = function () {
+            player1Image = `images/zodiac-symbols/${player1starSign}.png`
+            console.log(player1Image)
+        }
+
+        let month = player1dob[1]
+        let day = player1dob[2]
+
+        //Capricorn
+        if ((month === 12 && day >= 22) || (month === 01 && day <= 19)) {
+            player1starSign = 'Capricorn'
+        } 
+
+        // Aquarius
+        else if ((month === 01 && day >= 20) || (month === 02 && day <= 18)) {
+            player1starSign = 'Aquarius'
+        } 
+
+        // Pisces
+        else if ((month === 02 && day >= 19) || (month === 03 && day <= 20)) {
+            player1starSign = 'Pisces'
+        } 
+
+        // Aries
+        else if ((month === 03 && day >= 21) || (month === 04 && day <= 19)) {
+            player1starSign = 'Aries'
+        } 
+
+        // Taurus
+        else if ((month === 04 && day >= 20) || (month === 05 && day <= 20)) {
+            player1starSign = 'Taurus'
+        } 
+
+        // Gemini
+        else if ((month === 05 && day >= 21) || (month === 06 && day <= 21)) {
+            player1starSign = 'Gemini'
+        } 
+
+        // Cancer - done
+        else if ((month === 06 && day >= 22) || (month === 07 && day <= 22)) {
+            player1starSign = 'Cancer'
+        } 
+        
+        // Leo
+        else if ((month === 07 && day >= 23) || (month === 08 && day <= 22)) {
+            player1starSign = 'Leo'
+        } 
+        
+        // Virgo
+        else if ((month === 08 && day >= 23) || (month === 09 && day <= 22)) {
+            player1starSign = 'Virgo'
+        } 
+        
+        // Libra
+        else if ((month === 09 && day >= 23) || (month === 10 && day <= 23)) {
+            player1starSign = 'Libra'
+        } 
+        
+        // Scorpius
+        else if ((month === 10 && day >= 24) || (month === 11 && day <= 21)) {
+            player1starSign = 'Scorpius'
+        } 
+        
+        // Sagittarius
+        else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
+            console.log('You are Sagittarius!')
+        }         
+
+        applyImage()
+
+    }; // end of whichZodiacSign()
+
+    const $gameWelcome = function () {
+        $('#charCreationTitle').fadeIn(2000).fadeOut(1000)
+        $('#nameDiv').delay(3500).fadeIn(1000)
+    }; // end of $gameWelcome()
+
+    $gameWelcome()
+
+    const sayHelloToName = function () {
+        $('#nameDiv').fadeOut(1000)
+        $('h1.logoSelectionWelcome').html(`Hello ${player1name}`)
+        $('#chooseLogo').delay(1500).fadeIn(2000)
+    }; // end of sayHelloToName()
+
+    $('#nameSubmit').on('click', function (player) {
+        player1name = $(this).prev().val()
+        sayHelloToName()
+    }); // end of nameSubmit onClick
+
+    $('#dobSubmit').on('click', function (player) {
+        let dob = $(this).prev().val()
+        if (player === player1) {
+            player1dobStringArray = dob.split('-')
+            player1dobFunct(player)
+            whichZodiacSign(player)
+        } else {
+            player1dobStringArray = dob.split('-')
+            player1dobFunct(player)
+            whichZodiacSign(player)
+            endOfCharCreation()
+        }
+
+    }); // end of dobSubmit onClick
 
     const showBoard = function () {
         $('.tictactoeBoard').fadeIn(3000).css({
@@ -16,12 +132,15 @@ $( document ).ready(function() {
         })
     }
 
-    showBoard()
+    const endOfCharCreation = function () {
+        $('#charCreation').fadeOut(2000)
+        $('#gameBoard').delay(2000).fadeIn(2000)
+        showBoard()
+    }
 
     const showWinnerAnnouncement = function () {
         $('.fixedContainer').toggle()
     }
-
 
     const findOutPlayer = function () {
         if (turnTracker % 2 !== 0) {
@@ -98,15 +217,25 @@ $( document ).ready(function() {
         if (player === 'Player1') {
 
             if 
-            ((squaresClickedByPlayer1.includes('square1') && squaresClickedByPlayer1.includes('square2') && squaresClickedByPlayer1.includes('square3')) 
+
+            ((squaresClickedByPlayer1.includes('square1') && squaresClickedByPlayer1.includes('square2') && squaresClickedByPlayer1.includes('square3'))
+
             || (squaresClickedByPlayer1.includes('square1') && squaresClickedByPlayer1.includes('square4') && squaresClickedByPlayer1.includes('square7'))
+            
             || (squaresClickedByPlayer1.includes('square1') && squaresClickedByPlayer1.includes('square5') && squaresClickedByPlayer1.includes('square9'))
+            
             || (squaresClickedByPlayer1.includes('square2') && squaresClickedByPlayer1.includes('square5') && squaresClickedByPlayer1.includes('square8'))
+            
             || (squaresClickedByPlayer1.includes('square3') && squaresClickedByPlayer1.includes('square5') && squaresClickedByPlayer1.includes('square7'))
+            
             || (squaresClickedByPlayer1.includes('square3') && squaresClickedByPlayer1.includes('square6') && squaresClickedByPlayer1.includes('square9'))
+            
             || (squaresClickedByPlayer1.includes('square4') && squaresClickedByPlayer1.includes('square5') && squaresClickedByPlayer1.includes('square6'))
+            
             || (squaresClickedByPlayer1.includes('square7') && squaresClickedByPlayer1.includes('square8') && squaresClickedByPlayer1.includes('square9'))
-            ) {
+            ) 
+            
+            {
 
                 player1wins++
                 disableBoardClicks()
@@ -153,14 +282,17 @@ $( document ).ready(function() {
 
         $square = $(this)
         idOfSquare = $(this).attr('id');
+        console.log($square)
 
 
         const putInSymbol = function () {
             if (currentPlayer === 'Player1') {
-                $square.css({'backgroundImage': 'url(/Users/daniel/sei/projects/tic-tac-toe/images/x.png)'})
+                $square.css("background-image", "url(" + player1Image + ")");
             }
+
+            // TODO: Get date from second player and choose image
             else {
-                $square.css({'backgroundImage': 'url(/Users/daniel/sei/projects/tic-tac-toe/images/o.png)'})
+                $square.css("background-image", "url(" + player1Image + ")");
             }
         }
 
