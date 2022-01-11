@@ -11,24 +11,99 @@ let player1dobStringArray = []
 let player1dob = []
 let player1starSign = ''
 let player1Image = ''
+let player2name = ''
+let player2dobStringArray = []
+let player2dob = []
+let player2starSign = ''
+let player2Image = ''
+let whoseturn = 1
 
 $( document ).ready(function() {
     console.log( "document ready!" );
 
-    const player1dobFunct = function() {
-        player1dob = player1dobStringArray.map(Number)
-    }; // end of player1dobFunct
+    // this is just the Initial Fade In of the title and then the name form
+    const $gameWelcome = function () {
+        $('#charCreationTitle').fadeIn(2000).fadeOut(1000)
+        $('#nameDiv').delay(3500).fadeIn(1000)
+    }; // end of $gameWelcome()
+
+    $gameWelcome()
+
+    // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
+
+    // FIXME: THIS HAS NOW BEEN PREPPED FOR PLAYER 2
+
+    $('#nameSubmit').on('click', function () {
+
+        // whoseturn simply finds out if this is player 1 or player 2 entering their name by working out how many times this tracker has ticked up (or at all)
+        if (whoseturn === 1) {
+            player1name = $(this).prev().val()
+            sayHelloToName('player1')
+            whoseturn++
+        } else if (whoseturn === 2) {
+            player2name = $(this).prev().val()
+            sayHelloToName('player2')
+        }
+    }); // end of nameSubmit onClick
+
+    // This is when the player has entered their name! It will now fade out the form and show them a message saying 'Hello, NAME' and ask for their DOB.
+    // FIXME: This has been prepped for player 2
+    const sayHelloToName = function (player) {
+
+        // fade out the name form
+        $('#nameDiv').fadeOut(1000)
+
+        // it will now say hi to whichever play it is
+
+        if (player === 'player1') {
+            $('h1.logoSelectionWelcome').html(`Hello ${player1name}`)
+        } else if (player === 'player2') {
+            $('h1.logoSelectionWelcome').html(`Hello ${player2name}`)
+        }
+
+        $('#chooseLogo').delay(1500).fadeIn(2000)
+    }; // end of sayHelloToName()
+
+    // This is the form that turns up asking players for their DOB. It is going to set the players DOB as a string and begin the next few functions
+    // FIXME: This is being prepped for player 2 
+    // TODO: Need to come back to this to do whichZodiacSign() for p2
+
+    $('#dobSubmit').on('click', function (eventObject) {
+        let dob = $(this).prev().val()
+        
+        if (whoseturn === 1) {
+            player1dobStringArray = dob.split('-')
+            playerDOBFunction('player1')
+            whichZodiacSign('player1')
+        } else if (whoseturn === 2) {
+            player2dobStringArray = dob.split('-')
+            playerDOBFunction('player2')
+            whichZodiacSign('player2')
+        }
+
+    }); // end of dobSubmit onClick
+
+    // this function really only turns their DOB string array in to an actual numbered array for later use. This is a helper function.
+    const playerDOBFunction = function(player) {
+
+        if (player === 'player1') {
+            player1dob = player1dobStringArray.map(Number)
+        } else if (player === 'player2') {
+            player2dob = player2dobStringArray.map(Number)
+        }
+        
+    }; // end of playerDOBFunction
 
     const whichZodiacSign = function () {
+
+        let month = player1dob[1]
+        let day = player1dob[2]
 
         const applyImage = function () {
             player1Image = `images/zodiac-symbols/${player1starSign}.png`
             console.log(player1Image)
         }
-
-        let month = player1dob[1]
-        let day = player1dob[2]
-
+        
         //Capricorn
         if ((month === 12 && day >= 22) || (month === 01 && day <= 19)) {
             player1starSign = 'Capricorn'
@@ -92,33 +167,6 @@ $( document ).ready(function() {
         applyImage()
 
     }; // end of whichZodiacSign()
-
-    const $gameWelcome = function () {
-        $('#charCreationTitle').fadeIn(2000).fadeOut(1000)
-        $('#nameDiv').delay(3500).fadeIn(1000)
-    }; // end of $gameWelcome()
-
-    $gameWelcome()
-
-    const sayHelloToName = function () {
-        $('#nameDiv').fadeOut(1000)
-        $('h1.logoSelectionWelcome').html(`Hello ${player1name}`)
-        $('#chooseLogo').delay(1500).fadeIn(2000)
-    }; // end of sayHelloToName()
-
-    $('#nameSubmit').on('click', function (eventObject) {
-        player1name = $(this).prev().val()
-        sayHelloToName()
-    }); // end of nameSubmit onClick
-
-    $('#dobSubmit').on('click', function (eventObject) {
-        let dob = $(this).prev().val()
-        console.log(dob)
-        player1dobStringArray = dob.split('-')
-        player1dobFunct()
-        whichZodiacSign()
-        endOfCharCreation()
-    }); // end of dobSubmit onClick
 
     const showBoard = function () {
         $('.tictactoeBoard').fadeIn(3000).css({
