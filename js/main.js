@@ -19,7 +19,7 @@ $( document ).ready(function() {
         player1dob = player1dobStringArray.map(Number)
     }; // end of player1dobFunct
 
-    const whichZodiacSign = function (player) {
+    const whichZodiacSign = function () {
 
         const applyImage = function () {
             player1Image = `images/zodiac-symbols/${player1starSign}.png`
@@ -106,24 +106,18 @@ $( document ).ready(function() {
         $('#chooseLogo').delay(1500).fadeIn(2000)
     }; // end of sayHelloToName()
 
-    $('#nameSubmit').on('click', function (player) {
+    $('#nameSubmit').on('click', function (eventObject) {
         player1name = $(this).prev().val()
         sayHelloToName()
     }); // end of nameSubmit onClick
 
-    $('#dobSubmit').on('click', function (player) {
+    $('#dobSubmit').on('click', function (eventObject) {
         let dob = $(this).prev().val()
-        if (player === player1) {
-            player1dobStringArray = dob.split('-')
-            player1dobFunct(player)
-            whichZodiacSign(player)
-        } else {
-            player1dobStringArray = dob.split('-')
-            player1dobFunct(player)
-            whichZodiacSign(player)
-            endOfCharCreation()
-        }
-
+        console.log(dob)
+        player1dobStringArray = dob.split('-')
+        player1dobFunct()
+        whichZodiacSign()
+        endOfCharCreation()
     }); // end of dobSubmit onClick
 
     const showBoard = function () {
