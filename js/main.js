@@ -39,7 +39,6 @@ $( document ).ready(function() {
         if (whoseturn === 1) {
             player1name = $(this).prev().val()
             sayHelloToName('player1')
-            whoseturn++
         } else if (whoseturn === 2) {
             player2name = $(this).prev().val()
             sayHelloToName('player2')
@@ -66,7 +65,6 @@ $( document ).ready(function() {
 
     // This is the form that turns up asking players for their DOB. It is going to set the players DOB as a string and begin the next few functions
     // FIXME: This is being prepped for player 2 
-    // TODO: Need to come back to this to do whichZodiacSign() for p2
 
     $('#dobSubmit').on('click', function (eventObject) {
         let dob = $(this).prev().val()
@@ -75,15 +73,28 @@ $( document ).ready(function() {
             player1dobStringArray = dob.split('-')
             playerDOBFunction('player1')
             whichZodiacSign('player1')
+            whoseturn++
+            player2Welcome()
         } else if (whoseturn === 2) {
             player2dobStringArray = dob.split('-')
             playerDOBFunction('player2')
             whichZodiacSign('player2')
+            endOfCharCreation()
         }
 
     }); // end of dobSubmit onClick
 
+    // this is just the Initial Fade In of the title and then the name form
+    const player2Welcome = function () {
+        $('#chooseLogo').fadeOut(1000)
+        let label = $('div#nameDiv').children()[0]
+        $(label).html('And player 2 - your name is:')
+        $('#nameDiv').delay(1500).fadeIn(1500)
+    }; // end of player2Welcome()
+
     // this function really only turns their DOB string array in to an actual numbered array for later use. This is a helper function.
+    // FIXME: Set up for 2 players
+
     const playerDOBFunction = function(player) {
 
         if (player === 'player1') {
@@ -94,77 +105,112 @@ $( document ).ready(function() {
         
     }; // end of playerDOBFunction
 
-    const whichZodiacSign = function () {
+    // helper function to return Star Sign
+    // FIXME: Set up for 2 players
 
-        let month = player1dob[1]
-        let day = player1dob[2]
+    const getSign = function (player) {
 
-        const applyImage = function () {
-            player1Image = `images/zodiac-symbols/${player1starSign}.png`
-            console.log(player1Image)
+        let month;
+        let day;
+
+        if (player === 'player1') {
+            month = player1dob[1]
+            day = player1dob[2]
+        } 
+        else if (player === 'player2') {
+            month = player2dob[1]
+            day = player2dob[2]
         }
-        
+
         //Capricorn
         if ((month === 12 && day >= 22) || (month === 01 && day <= 19)) {
-            player1starSign = 'Capricorn'
+        return 'Capricorn'
         } 
 
         // Aquarius
         else if ((month === 01 && day >= 20) || (month === 02 && day <= 18)) {
-            player1starSign = 'Aquarius'
+        return 'Aquarius'
         } 
 
         // Pisces
         else if ((month === 02 && day >= 19) || (month === 03 && day <= 20)) {
-            player1starSign = 'Pisces'
+        return 'Pisces'
         } 
 
         // Aries
         else if ((month === 03 && day >= 21) || (month === 04 && day <= 19)) {
-            player1starSign = 'Aries'
+        return 'Aries'
         } 
 
         // Taurus
         else if ((month === 04 && day >= 20) || (month === 05 && day <= 20)) {
-            player1starSign = 'Taurus'
+        return 'Taurus'
         } 
 
         // Gemini
         else if ((month === 05 && day >= 21) || (month === 06 && day <= 21)) {
-            player1starSign = 'Gemini'
+        return 'Gemini'
         } 
 
         // Cancer - done
         else if ((month === 06 && day >= 22) || (month === 07 && day <= 22)) {
-            player1starSign = 'Cancer'
+        return 'Cancer'
         } 
         
         // Leo
         else if ((month === 07 && day >= 23) || (month === 08 && day <= 22)) {
-            player1starSign = 'Leo'
+        return 'Leo'
         } 
         
         // Virgo
         else if ((month === 08 && day >= 23) || (month === 09 && day <= 22)) {
-            player1starSign = 'Virgo'
+        return 'Virgo'
         } 
         
         // Libra
         else if ((month === 09 && day >= 23) || (month === 10 && day <= 23)) {
-            player1starSign = 'Libra'
+        return 'Libra'
         } 
         
         // Scorpius
         else if ((month === 10 && day >= 24) || (month === 11 && day <= 21)) {
-            player1starSign = 'Scorpius'
+        return 'Scorpius'
         } 
         
         // Sagittarius
         else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
-            console.log('You are Sagittarius!')
-        }         
+        return 'Sagittarius'
+        }       
+    }
 
-        applyImage()
+    // the actual function of assigning the sign to an image and parsing that image as the image the player uses
+    // FIXME: Set up for 2 players, including using a diff coloured image if same star sign
+
+    const whichZodiacSign = function (player) {
+
+        let signName;
+        
+        if (player === 'player1') {
+            signName = getSign('player1')
+        } 
+        else if (player === 'player2') {
+            signName = getSign('player2')
+        }
+
+        const applyImage = function (signName) {
+            if (player === 'player1') {
+                player1Image = `images/zodiac-symbols/${signName}.png`
+            } else if (player === 'player2') {
+                if (player1Image === `images/zodiac-symbols/${signName}.png`) {
+                    player2Image = `images/backup-zodiac-symbols/${signName}.png`
+                } else {
+                    player2Image = `images/zodiac-symbols/${signName}.png`
+                }
+            }
+            
+        }  
+
+        applyImage(signName)
 
     }; // end of whichZodiacSign()
 
@@ -334,7 +380,7 @@ $( document ).ready(function() {
 
             // TODO: Get date from second player and choose image
             else {
-                $square.css("background-image", "url(" + player1Image + ")");
+                $square.css("background-image", "url(" + player2Image + ")");
             }
         }
 
