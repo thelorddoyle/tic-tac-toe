@@ -1,18 +1,183 @@
+reset
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* my styling */
+
 * {
     box-sizing: border-box;
-    margin: 0;
-    border: 0;
-    border: 0px red solid;
 }
 
 :root {
-    --grid-size: 50vw;
+    /* --grid-size: 30vw; */
+    --primary-color: black;
+    --secondary-color: whitesmoke;
+    --tertiary-color: #fff2f2;
+    --quaternary-color: grey;
+
 }
+
+.displayAds {
+    margin: 0 auto;
+    max-width: 90vw;
+}
+
+.displayAds img {
+    max-width: 300px;
+}
+
+@media (min-width: 0em) {
+    :root {
+        --grid-size: 80vw;
+    }
+
+    .displayAds img {
+        display: inline-block;
+        width: 42.5vw;
+    }
+    #ad1 {
+        display: none;
+    }
+    div#gameStats h3 {
+        font-size: 1.5rem;
+    }
+    div#gameStats h4 {
+        padding-top: 10px;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 40em) {
+
+    :root {
+        --grid-size: 70vw;
+    }
+
+    .displayAds img {
+        display: inline-block;
+        width: 40vw;
+    }
+    div#gameStats h3 {
+        font-size: 2rem;
+    }
+    div#gameStats h4 {
+        padding-top: 20px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 50em) {
+
+    :root {
+        --grid-size: 40vw;
+    }
+
+    .displayAds img {
+        display: inline-block;
+        width: 40vw;
+    }
+    div#gameStats h3 {
+        font-size: 2rem;
+    }
+    div#gameStats h4 {
+        padding-top: 20px;
+        font-size: 1.5rem;
+    }
+}
+
+
 
 body {
     display: relative;
     width: 100%;
-    background-color: whitesmoke;
+    background-color: var(--secondary-color);
+}
+
+header {
+    background-color: var(--primary-color);
+    position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+    border-bottom: solid 2px var(--secondary-colour);
+}
+
+header h1 {
+    color: var(--secondary-color);
+}
+
+#header-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    position: static;
+    display: block;
+    padding: 20px;
+}
+
+ul#navlist
+{
+  text-align: center;
+}
+
+a.navlink {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 1em;
+}
+
+a.navlink:hover {
+    color: var(--tertiary-color);
+    text-decoration: underline;
+}
+
+h, p, div, a, input, li {
+    font-family: 'Red Hat Display', sans-serif;
 }
 
 div#charCreation {
@@ -51,7 +216,7 @@ div#gameBoard {
 
 .fixedContainer {
     display: none;
-    background-color:#ddd;
+    background-color: var(--tertiary-color);
     position: fixed;
     padding: 2em;
     left: 50%;
@@ -73,17 +238,18 @@ div#gameBoard {
 }
 
 h1 {
+    font-size: 1.6em;
     display: block;
-    color: black;
+    color: var(--primary-color);
     text-align: center;
 }
 
 h3 {
-    display: inline;
+    text-align: center;
 }
 
 h3#winner-message {
-    color: black;
+    color: var(--primary-color);
 }
 
 div.spacer {
@@ -108,10 +274,11 @@ img {
 
 .boardSquare {
     display: flex;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
-    background-color: white;
+    background-color: var(--primary-color);
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -120,7 +287,7 @@ img {
 }
 
 .boardSquare:hover {
-    background-color: papayawhip;
+    background-color: var(--quaternary-color);
 }
 
 .playerImage {
@@ -130,8 +297,12 @@ img {
 input[type=button] {
     margin-top: 40px;
     padding: 20px;
-    color: black;
-    border: 1px black solid;
+    color: var(--primary-color);
+    border: 1px var(--primary-color) solid;
+}
+
+input#startOver {
+    margin-top: 10px;
 }
 
 input[type=button]#nextGame {
@@ -141,22 +312,30 @@ input[type=button]#nextGame {
 }
 
 input[type=button]:hover {
-    color: whitesmoke;
-    background-color: grey;
+    color: var(--secondary-color);
+    background-color: var(--quaternary-color);
 }
 
 div#gameStats {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
 
 }
 
 div#gameStats h3 {
     display: block;
     padding-top: 20px;
-    font-size: 30px;
 }
 
 div#playerStats {
     display: inline-block;
+}
+
+div.displayAds {
+    position: static;
+}
+
+.displayAds img {
+    padding: 20px 0;
+    margin: 0 auto;
 }

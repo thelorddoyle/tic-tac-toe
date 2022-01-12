@@ -23,16 +23,14 @@ $( document ).ready(function() {
 
     // this is just the Initial Fade In of the title and then the name form
     const $gameWelcome = function () {
-        $('#charCreationTitle').fadeIn(2000).fadeOut(1000)
-        $('#nameDiv').delay(3500).fadeIn(1000)
+        $('#charCreationTitle').fadeIn(1000).fadeOut(500)
+        $('#nameDiv').delay(1750).fadeIn(500)
     }; // end of $gameWelcome()
 
-    $gameWelcome()
+    // TODO: Turn this on to remake game correctly
+    // $gameWelcome()
 
     // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
-
-    // FIXME: THIS HAS NOW BEEN PREPPED FOR PLAYER 2
-
     $('#nameSubmit').on('click', function () {
 
         // whoseturn simply finds out if this is player 1 or player 2 entering their name by working out how many times this tracker has ticked up (or at all)
@@ -46,11 +44,10 @@ $( document ).ready(function() {
     }); // end of nameSubmit onClick
 
     // This is when the player has entered their name! It will now fade out the form and show them a message saying 'Hello, NAME' and ask for their DOB.
-    // FIXME: This has been prepped for player 2
     const sayHelloToName = function (player) {
 
         // fade out the name form
-        $('#nameDiv').fadeOut(1000)
+        $('#nameDiv').fadeOut(500)
 
         // it will now say hi to whichever play it is
 
@@ -60,12 +57,10 @@ $( document ).ready(function() {
             $('h1.logoSelectionWelcome').html(`Hello ${player2name}`)
         }
 
-        $('#chooseLogo').delay(1500).fadeIn(2000)
+        $('#chooseLogo').delay(750).fadeIn(1000)
     }; // end of sayHelloToName()
 
     // This is the form that turns up asking players for their DOB. It is going to set the players DOB as a string and begin the next few functions
-    // FIXME: This is being prepped for player 2 
-
     $('#dobSubmit').on('click', function (eventObject) {
         let dob = $(this).prev().val()
         
@@ -73,12 +68,14 @@ $( document ).ready(function() {
             player1dobStringArray = dob.split('-')
             playerDOBFunction('player1')
             whichZodiacSign('player1')
+            $('#player1logo').attr('src', `${player1Image}`)
             whoseturn++
             player2Welcome()
         } else if (whoseturn === 2) {
             player2dobStringArray = dob.split('-')
             playerDOBFunction('player2')
             whichZodiacSign('player2')
+            $('#player2logo').attr('src', `${player2Image}`)
             endOfCharCreation()
         }
 
@@ -86,15 +83,13 @@ $( document ).ready(function() {
 
     // this is just the Initial Fade In of the title and then the name form
     const player2Welcome = function () {
-        $('#chooseLogo').fadeOut(1000)
+        $('#chooseLogo').fadeOut(500)
         let label = $('div#nameDiv').children()[0]
         $(label).html('And player 2 - your name is:')
-        $('#nameDiv').delay(1500).fadeIn(1500)
+        $('#nameDiv').delay(750).fadeIn(750)
     }; // end of player2Welcome()
 
     // this function really only turns their DOB string array in to an actual numbered array for later use. This is a helper function.
-    // FIXME: Set up for 2 players
-
     const playerDOBFunction = function(player) {
 
         if (player === 'player1') {
@@ -200,7 +195,9 @@ $( document ).ready(function() {
         const applyImage = function (signName) {
             if (player === 'player1') {
                 player1Image = `images/zodiac-symbols/${signName}.png`
+                $('#player1score').html(`${player1name}`)
             } else if (player === 'player2') {
+                $('#player2score').html(`${player2name}`)
                 if (player1Image === `images/zodiac-symbols/${signName}.png`) {
                     player2Image = `images/backup-zodiac-symbols/${signName}.png`
                 } else {
@@ -215,16 +212,33 @@ $( document ).ready(function() {
     }; // end of whichZodiacSign()
 
     const showBoard = function () {
-        $('.tictactoeBoard').fadeIn(3000).css({
+        $('.tictactoeBoard').fadeIn(1500).css({
             'display': 'grid',
         })
     }
 
     const endOfCharCreation = function () {
-        $('#charCreation').fadeOut(2000)
-        $('#gameBoard').delay(2000).fadeIn(2000)
+        $('#charCreation').fadeOut(1000)
+        $('#gameBoard').delay(1000).fadeIn(1000)
         showBoard()
     }
+
+    // helper function to bypass entering info
+    const bypassInfoEntry = function () {
+        player1name = 'Daniel'
+        player2name = 'Prabina'
+        player1dobStringArray = ['1988', '10', '14']
+        player2dobStringArray = ['1989', '04', '18']
+        playerDOBFunction('player1')
+        whichZodiacSign('player1')
+        $('#player1logo').attr('src', `${player1Image}`)
+        playerDOBFunction('player2')
+        whichZodiacSign('player2')
+        $('#player2logo').attr('src', `${player2Image}`)
+        endOfCharCreation()
+    }
+
+    bypassInfoEntry()
 
     const showWinnerAnnouncement = function () {
         $('.fixedContainer').toggle()
@@ -287,15 +301,22 @@ $( document ).ready(function() {
 
         const showWinner = function (h3node, winner, wins) {
 
-            $(`h3#${h3node}`).html(`Score: ${wins}`)
-
-            let $winnerMessage = $('<h3 id="winner-message">')
-            $winnerMessage.html(`${winner} wins this game!`)
-            $('div#winnerAnnouncement').prepend($winnerMessage)
+            if (currentPlayer === 'Player1') {
+                $(`h4#${h3node}`).html(`Wins: ${wins}`)
+                let $winnerMessage = $('<h3 id="winner-message">')
+                $winnerMessage.html(`${player1name} wins this game!`)
+                $('div#winnerAnnouncement').prepend($winnerMessage)
+            } else {
+                $(`h4#${h3node}`).html(`Wins: ${wins}`)
+                let $winnerMessage = $('<h3 id="winner-message">')
+                $winnerMessage.html(`${player2name} wins this game!`)
+                $('div#winnerAnnouncement').prepend($winnerMessage)
+            }
             
         }
 
         showWinnerAnnouncement()
+        // announceWinner('player1score', 'Player 1', player1wins)
         showWinner(h3node, winner, wins)
         showPlayAgainButton()
     }
@@ -327,7 +348,7 @@ $( document ).ready(function() {
 
                 player1wins++
                 disableBoardClicks()
-                announceWinner('player1score', 'Player 1', player1wins)
+                announceWinner('player1wins', 'Player 1', player1wins)
 
             } 
             
@@ -353,7 +374,7 @@ $( document ).ready(function() {
 
                 player2wins++
                 disableBoardClicks()
-                announceWinner('player2score', 'Player 2', player2wins)
+                announceWinner('player2wins', 'Player 2', player2wins)
                 showPlayAgainButton()
             } 
             
@@ -378,7 +399,6 @@ $( document ).ready(function() {
                 $square.css("background-image", "url(" + player1Image + ")");
             }
 
-            // TODO: Get date from second player and choose image
             else {
                 $square.css("background-image", "url(" + player2Image + ")");
             }
@@ -410,15 +430,9 @@ $( document ).ready(function() {
 
 // next actions
 
-// Allow players to customize their tokens (X, O, name, picture, etc)
-
-// do custom pictures
-
-// create a separate page where someone writes their name, chooses their player piece
-// (choose from 4 standard)
-// upload your own image & use
-
-// Get inventive with your styling, e.g. use hover effects or animations to spiff things up
+// make it so player 2's logo is the different color
+// make the Draw function work and a cat walk along the bottom of the screen
+// add multiplayer
 
 // 
 
