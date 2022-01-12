@@ -17,7 +17,7 @@
         <h1>Tic-Tac-ZODIAC</h1>
         <nav class="sticky">
             <ul id="navlist">
-                <a class="navlink" href="home.html"><li class="navlinks">Are you compatible?</li></a>
+                <a class="navlink" href="home.html"><li class="navlinks">Made by me</li></a>
             </ul>
         </nav>
     </div>
@@ -29,10 +29,16 @@
 
     <div id='nameDiv'>
 
-            <label for="playerName">Your name:</label>
-            <div class="spacer"></div>
-            <input id='nameInput' name="playerName" type="text" placeholder="Your name here" required>
-            <input id='nameSubmit' type="button" value="Submit">
+        <div id='howItWorks'>
+            <h2>How it works:</h2>
+            <p>Tic-Tac-Zodiac will magically know if you and your opponent are a perfect match. With thousands of years going in to it's design, the Zodiac™ supercomputer will make dating a whole lot easier.</p><br>
+            <p id='disclaimer'>Disclaimer: We do not take responsibility if you and your long-term partner play the game and disaster ensues.</p><br>
+            <p>If you are prepared to continue, good luck. Fill out this form:</p>
+        </div>
+        <label for="playerName">Who is the first brave soul:</label>
+        <div class="spacer"></div>
+        <input id='nameInput' name="playerName" type="text" placeholder="Your name here" required>
+        <input id='nameSubmit' type="button" value="Submit">
     
     </div>
 
@@ -64,8 +70,6 @@
         </div>
     </wrapper>
     <div class='pagelayout'>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
             <div class="tictactoeBoard">
                 <div class='boardSquare' id='square1'></div>
                 <div class='boardSquare' id='square2'></div>
@@ -77,38 +81,48 @@
                 <div class='boardSquare' id='square8'></div>
                 <div class='boardSquare' id='square9'></div>
             </div>
-            <div id='gameStats'>
-                <div>
+            <div id='gameStatGrid'>
+                <div></div>
+                <div id='gameStats'>
+                    <div class="playerStats">
+                        <h3 id='player1score'>Player 1</h3>
+                        <span class='stats'>
+                            <h4 id='player1wins'>Wins: 0</h4>
+                            <h4 id='player1draws'>Draws: 0</h4>
+                        </span>
+                        <img src="images/x.png" alt="x" class='playerImage' id='player1logo'>
+                    </div>
+                    <div class="playerStats">
+                        <h3 id='player2score'>Score: 0</h3>
+                        <span class='stats'>
+                            <h4 id='player2wins'>Wins: 0</h4>
+                            <h4 id='player2draws'>Draws: 0</h4>
+                        </span>
+                        <img src="images/o.png" alt="x" class='playerImage' id='player2logo'>
+                    </div>  
                 </div>
-                <div class="playerStats">
-                    <h3 id='player1score'>Player 1</h3>
-                    <span class='stats'>
-                        <h4 id='player1wins'>Wins: 0</h4>
-                        <h4 id='player1draws'>Draws: 0</h4>
-                    </span>
-                    <img src="images/x.png" alt="x" class='playerImage' id='player1logo'>
-                </div>
-                <div class="playerStats">
-                    <h3 id='player2score'>Score: 0</h3>
-                    <span class='stats'>
-                        <h4 id='player2wins'>Wins: 0</h4>
-                        <h4 id='player1draws'>Draws: 0</h4>
-                    </span>
-                    <img src="images/o.png" alt="x" class='playerImage' id='player2logo'>
-                </div>  
             </div>
-        <div id="symbols">
-            <input type="button" id='startOver' value="Reset Entire Game">
+    </div>
+
+    <!-- <div id="symbols">
+        <input type="button" id='startOver' value="Reset Entire Game">
+    </div> -->
+
+    <div id='displayAds'>
+        <div class='displayAd' id='displayAd1'>
+
         </div>
-        <div class='displayAds'>
+        <div class='displayAd' id='displayAd2'>
             <img id='ad1' src="images/display-ads/holiday-ad.png" alt="display ad">
             <img id='ad2' src="images/display-ads/delivery-ad.png" alt="display ad">
             <img id='ad3' src="images/display-ads/board-game-ad.png" alt="display ad">
         </div>
-            
+        <div class='displayAd' id='displayAd3'>
+
+        </div>
     </div>
 </div>
-
+<div id="overlay"></div>
     
     
     <script src="js/jquery.js"></script>

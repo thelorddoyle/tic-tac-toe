@@ -46,8 +46,25 @@ table {
 
 /* my styling */
 
-* {
-    box-sizing: border-box;
+#howItWorks {
+    max-width: 300px;
+    background-color: var(--background-pale);
+    padding: 40px;
+    margin-bottom: 40px;
+    border: 5px solid var(--primary-color);
+}
+
+h2 {
+    font-size: 1.6em;
+    padding-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+p#disclaimer {
+    font-weight: 600;
 }
 
 :root {
@@ -56,95 +73,82 @@ table {
     --secondary-color: whitesmoke;
     --tertiary-color: #fff2f2;
     --quaternary-color: grey;
+    --background-pale: white;
 
 }
 
-.displayAds {
-    margin: 0 auto;
-    max-width: 90vw;
+div.playerStats {
+    background-color: var(--tertiary-color);
+    border: var(--primary-color) 5px solid;
+    margin: 20px 20px 0px 20px;
+    padding: 0px 30px;
 }
 
-.displayAds img {
+.pagelayout {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    grid-template-columns: 1fr;
+}
+
+div#gameStatGrid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    text-align: center;
+}
+
+#gameStats {
+    justify-self: center;
+    align-self: center;
+}
+
+.tictactoeBoard {
+    background-color: var(--primary-color);
+    max-height: 550px;
+    max-width: 550px;
+    margin-top: 5%;
+    display: none;
+    /* display: grid; */
+    justify-self: center;
+    align-self: center;
+    width: var(--grid-size);
+    height: var(--grid-size);
+    grid-template-columns: 1fr 1fr 1fr;
+    /* border: var(--primary-color) 5px solid; */
+    grid-gap: 5px;
+}
+
+#displayAds {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    grid-template-columns: 1fr;
+}
+
+.displayAd img {
+    display: block;
     max-width: 300px;
+    margin: 0 auto;
+    padding: 0;
 }
-
-@media (min-width: 0em) {
-    :root {
-        --grid-size: 80vw;
-    }
-
-    .displayAds img {
-        display: inline-block;
-        width: 42.5vw;
-    }
-    #ad1 {
-        display: none;
-    }
-    div#gameStats h3 {
-        font-size: 1.5rem;
-    }
-    div#gameStats h4 {
-        padding-top: 10px;
-        font-size: 1rem;
-    }
-}
-
-@media (min-width: 40em) {
-
-    :root {
-        --grid-size: 70vw;
-    }
-
-    .displayAds img {
-        display: inline-block;
-        width: 40vw;
-    }
-    div#gameStats h3 {
-        font-size: 2rem;
-    }
-    div#gameStats h4 {
-        padding-top: 20px;
-        font-size: 1.5rem;
-    }
-}
-
-@media (min-width: 50em) {
-
-    :root {
-        --grid-size: 40vw;
-    }
-
-    .displayAds img {
-        display: inline-block;
-        width: 40vw;
-    }
-    div#gameStats h3 {
-        font-size: 2rem;
-    }
-    div#gameStats h4 {
-        padding-top: 20px;
-        font-size: 1.5rem;
-    }
-}
-
-
 
 body {
+    margin: 0 auto;
     display: relative;
-    width: 100%;
+    width: 70em;
     background-color: var(--secondary-color);
 }
 
 header {
-    background-color: var(--primary-color);
+    margin-top: 20px;
+    background-color: var(--secondary-color);
     position: -webkit-sticky;
 	position: sticky;
 	top: 0;
-    border-bottom: solid 2px var(--secondary-colour);
 }
 
 header h1 {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 #header-grid {
@@ -166,7 +170,7 @@ ul#navlist
 }
 
 a.navlink {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 1em;
 }
@@ -180,13 +184,21 @@ h, p, div, a, input, li {
     font-family: 'Red Hat Display', sans-serif;
 }
 
-div#charCreation {
+/* div#charCreation {
     position: fixed;
     top: 25%;
     left: 25%;
-    margin: 0 auto;
     width: 50vw;
     height: 50vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+} */
+
+div#charCreation {
+    padding: 0 5%;
+    height: 100vh;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -215,6 +227,7 @@ div#gameBoard {
 }
 
 .fixedContainer {
+    z-index: 2;
     display: none;
     background-color: var(--tertiary-color);
     position: fixed;
@@ -228,13 +241,6 @@ div#gameBoard {
     display: absolute;
     top: 50px;
     left: 50px;
-}
-
-.pagelayout {
-    display: grid;
-    text-align: center;
-    justify-content: center;
-    grid-template-columns: 1fr;
 }
 
 h1 {
@@ -262,15 +268,7 @@ img {
     padding: 10px;
 }
 
-.tictactoeBoard {
-    display: none;
-    /* display: grid; */
-    margin: 0 auto;
-    width: var(--grid-size);
-    height: var(--grid-size);
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-}
+
 
 .boardSquare {
     display: flex;
@@ -278,16 +276,16 @@ img {
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     text-align: center;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    /* border: 1px solid var(--tertiary-color); */
     pointer-events: all;
 }
 
 .boardSquare:hover {
-    background-color: var(--quaternary-color);
+    background-color: var(--tertiary-color);
 }
 
 .playerImage {
@@ -318,7 +316,7 @@ input[type=button]:hover {
 
 div#gameStats {
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
 }
 
@@ -327,15 +325,137 @@ div#gameStats h3 {
     padding-top: 20px;
 }
 
-div#playerStats {
-    display: inline-block;
+@media (min-width: 0em) {
+    :root {
+        --grid-size: 80vw;
+    }
+
+    .displayAd img {
+        display: block;
+        width: 100w;
+    }
+    #displayAd1 {
+        display: none;
+    }
+    div#gameStats h3 {
+        font-size: 1.5rem;
+    }
+    div#gameStats h4 {
+        padding-top: 10px;
+        font-size: 1rem;
+    }
+    div.playerStats {
+        margin: 20px 20px 20px 20px;
+        padding: 0px 10px;
+    }
+
+    body {
+        width: 100%;
+    }
+
 }
 
-div.displayAds {
-    position: static;
+@media (min-width: 40em) {
+
+    :root {
+        --grid-size: 70vw;
+    }
+
+    #displayAds {
+        grid-template-columns: 1fr;
+    }
+
+    #displayAd1 {
+        display: block;
+    }
+
+    .displayAd img {
+        display: inline-block;
+        width: 30vw;
+    }
+
+    div#gameStats h3 {
+        font-size: 2rem;
+    }
+
+    div#gameStats h4 {
+        padding-top: 20px;
+        font-size: 1.5rem;
+    }
+
+    div.playerStats {
+        margin: 20px 20px 20px 20px;
+        padding: 0px 4.2em;
+    }
+
+
 }
 
-.displayAds img {
-    padding: 20px 0;
-    margin: 0 auto;
+@media (min-width: 70em) {
+
+    :root {
+        --grid-size: 50vw;
+    }
+
+    .tictactoeBoard {
+        margin-top: 0px;
+    }
+
+    .displayAd img {
+        display: inline-block;
+        width: 40vw;
+    }
+
+    div#gameStats {
+        grid-template-columns: 1fr;
+    }
+
+    div#gameStats h3 {
+        font-size: 2rem;
+    }
+
+    div#gameStats h4 {
+        padding-top: 20px;
+        font-size: 1.5rem;
+    }
+
+    .pagelayout {
+        grid-template-columns: 2fr 1fr;
+        height: 60vh;
+    }
+
+    div.playerStats {
+        margin: 20px 20px 20px 20px;
+        padding: 0px 4.2em;
+    }
+
+    body {
+        width: 70em;
+    }
+
 }
+
+
+/* got fed up of CSS and found this overlay on WS3 schools haha */
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
+
+
+
+/* @media (min-width: 90em) {
+    .pagelayout {
+        grid-template-columns: 1fr 1fr;
+        height: 80vh;
+    }
+} */

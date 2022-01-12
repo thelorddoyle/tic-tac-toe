@@ -28,7 +28,7 @@ $( document ).ready(function() {
     }; // end of $gameWelcome()
 
     // TODO: Turn this on to remake game correctly
-    // $gameWelcome()
+    $gameWelcome()
 
     // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
     $('#nameSubmit').on('click', function () {
@@ -198,11 +198,7 @@ $( document ).ready(function() {
                 $('#player1score').html(`${player1name}`)
             } else if (player === 'player2') {
                 $('#player2score').html(`${player2name}`)
-                if (player1Image === `images/zodiac-symbols/${signName}.png`) {
-                    player2Image = `images/backup-zodiac-symbols/${signName}.png`
-                } else {
-                    player2Image = `images/zodiac-symbols/${signName}.png`
-                }
+                player2Image = `images/backup-zodiac-symbols/${signName}.png`
             }
             
         }  
@@ -223,24 +219,26 @@ $( document ).ready(function() {
         showBoard()
     }
 
-    // helper function to bypass entering info
-    const bypassInfoEntry = function () {
-        player1name = 'Daniel'
-        player2name = 'Prabina'
-        player1dobStringArray = ['1988', '10', '14']
-        player2dobStringArray = ['1989', '04', '18']
-        playerDOBFunction('player1')
-        whichZodiacSign('player1')
-        $('#player1logo').attr('src', `${player1Image}`)
-        playerDOBFunction('player2')
-        whichZodiacSign('player2')
-        $('#player2logo').attr('src', `${player2Image}`)
-        endOfCharCreation()
-    }
+    // TODO: TURN THIS ON TO BYPASS INFO INPUT
+    // // helper function to bypass entering info
+    // const bypassInfoEntry = function () {
+    //     player1name = 'Daniel'
+    //     player2name = 'Prabina'
+    //     player1dobStringArray = ['1988', '10', '14']
+    //     player2dobStringArray = ['1989', '04', '18']
+    //     playerDOBFunction('player1')
+    //     whichZodiacSign('player1')
+    //     $('#player1logo').attr('src', `${player1Image}`)
+    //     playerDOBFunction('player2')
+    //     whichZodiacSign('player2')
+    //     $('#player2logo').attr('src', `${player2Image}`)
+    //     endOfCharCreation()
+    // }
 
-    bypassInfoEntry()
+    // bypassInfoEntry()
 
     const showWinnerAnnouncement = function () {
+        $('#overlay').toggle()
         $('.fixedContainer').toggle()
     }
 
