@@ -46,6 +46,10 @@ table {
 
 /* my styling */
 
+#header-grid h1 {
+    font-weight: 800;
+}
+
 #howItWorks {
     max-width: 300px;
     background-color: var(--background-pale);
@@ -401,6 +405,10 @@ div#gameStats h3 {
         margin-top: 0px;
     }
 
+    #displayAds {
+        /* grid-auto-rows: minmax(150px, auto)  */
+    }
+
     .displayAd img {
         display: inline-block;
         width: 40vw;
@@ -421,7 +429,7 @@ div#gameStats h3 {
 
     .pagelayout {
         grid-template-columns: 2fr 1fr;
-        height: 60vh;
+        /* height: 60vh; */
     }
 
     div.playerStats {
