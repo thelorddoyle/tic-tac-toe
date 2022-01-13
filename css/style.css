@@ -46,6 +46,21 @@ table {
 
 /* my styling */
 
+.bigbar {
+    height: 25px;
+    background-color: var(--primary-color);
+    border-radius: 50px;
+}
+
+.smallbar {
+    background-color: var(--tertiary-color);
+    border-radius: 50px;
+    height: 19.5px;
+    padding-top: 5.5px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
 #header-grid h1 {
     font-weight: 800;
 }
@@ -65,6 +80,7 @@ h2 {
 
 p {
     font-size: 1.2em;
+    line-height: 1.2;
 }
 
 p#disclaimer {
@@ -188,21 +204,19 @@ h, p, div, a, input, li {
     font-family: 'Red Hat Display', sans-serif;
 }
 
-/* div#charCreation {
-    position: fixed;
-    top: 25%;
-    left: 25%;
-    width: 50vw;
-    height: 50vh;
+div#charCreation {
+    padding: 0 5%;
+    height: 80vh;
     display: grid;
     align-items: center;
     justify-content: center;
     text-align: center;
-} */
+}
 
-div#charCreation {
+
+div#resultsGrid {
     padding: 0 5%;
-    height: 100vh;
+    height: 80vh;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -215,6 +229,48 @@ div#charCreation {
 
 #nameDiv {
     display: none;
+}
+
+#loadingOfResults {
+    display: none;
+}
+
+#firstResultsScreen {
+    display: none;
+}
+
+
+div#resultsGrid {
+    display: none;
+}
+
+.resultsLogos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 30px 0;
+}
+
+.player1resultslogo {
+    padding-right: 40px;
+    justify-self: right;
+}
+
+.resultsLogos img {
+    width: 100px;
+}
+
+.player2resultslogo {
+    padding-left: 40px;
+    justify-self: left;
+}
+
+.zodiacResults {
+    max-width: 500px;
+    justify-self: center;
+    background-color: var(--background-pale);
+    padding: 40px;
+    margin-bottom: 40px;
+    border: 5px solid var(--primary-color);
 }
 
 #nameSubmit, #nameInput, #dobSubmit, #dobInput {
@@ -272,7 +328,9 @@ img {
     padding: 10px;
 }
 
-
+#secondResultScreen {
+    display: none;
+}
 
 .boardSquare {
     display: flex;

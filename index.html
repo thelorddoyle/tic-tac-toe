@@ -31,7 +31,7 @@
 
             <div id='howItWorks'>
                 <h2>How it works:</h2>
-                <p>Tic-Tac-Zodiac will magically know if you and your opponent are a perfect match after only <strong>3</strong> games. With thousands of years going in to it's design, the Zodiac™ supercomputer will make dating a whole lot easier.</p><br>
+                <p>Tic-Tac-Zodiac will magically know if you and your opponent are a perfect match after only <strong>3</strong> games. With thousands of years going in to it's design, the Tic-Tac-Zodiac™ supercomputer will make dating a whole lot easier.</p><br>
                 <p id='disclaimer'>Disclaimer: We do not take responsibility if you and your long-term partner play the game.</p><br>
                 <p>If you are prepared to continue, good luck. Fill out this form:</p>
             </div>
@@ -104,10 +104,6 @@
             </div>
     </div>
 
-    <!-- <div id="symbols">
-        <input type="button" id='startOver' value="Reset Entire Game">
-    </div> -->
-
     <div id='displayAds'>
         <div class='displayAd' id='displayAd1'>
 
@@ -122,6 +118,63 @@
         </div>
     </div>
 </div>
+
+<div id='resultsGrid'>
+
+        <h1 id='loadingOfResults' class='loading'>Calculating results...</h1>
+
+        <div class='results-screen' id='firstResultsScreen'>
+            <div class='resultsLogos' id='resultsLogos'>
+                <div class='player1resultslogo' id='player1resultslogo'>
+                    <img id='player1ResultsLogoImage' src="images/x.png" alt="player 1s logo">
+                    <h1>Player 1 Name</h1>
+                </div>
+                <div class='player2resultslogo' id='player2resultslogo'>  
+                    <img id='player2ResultsLogoImage' src="images/o.png" alt="player 2s logo">
+                    <h1>Player 2 Name</h1>
+                </div>
+            </div>
+    
+                <div class='zodiacResults' id='zodiacResults'>
+                    <h2>Your astrological results:</h2>
+                    <p>You know what? It is beets. I've crashed into a beet truck. So you two dig up, dig up dinosaurs? We gotta burn the rain forest, dump toxic waste, pollute the air, and rip up the OZONE! 'Cause maybe if we screw up this planet enough, they won't want it anymore!
+
+                    They're using our own satellites against us. And the clock is ticking. We gotta burn the rain forest, dump toxic waste, pollute the air, and rip up the OZONE! 'Cause maybe if we screw up this planet enough, they won't want it anymore! Hey, you know how I'm, like, always trying to save the planet? Here's my chance.</p><br><br>
+                    <div class="bigbar">
+                        <div class="smallbar" style="width:25%">25%</div>
+                    </div>
+                    <br><br>
+                    <h1>But the game results tell us...</h1>
+                    <input id='tictactoeResults' type="button" value="WHAT?!">
+                </div>
+                
+        
+        </div>
+        <div class='results-screen' id="secondResultScreen">
+
+            <div class='resultsLogos' id='resultsLogos2'>
+                <div class='player1resultslogo' id='player1resultslogo2'>
+                    <img id='player1ResultsLogoImage2' src="images/x.png" alt="player 1s logo">
+                    <h1>Player 1 Name</h1>
+                </div>
+                <div class='player2resultslogo' id='player2resultslogo2'>  
+                    <img id='player2ResultsLogoImage2' src="images/o.png" alt="player 2s logo">
+                    <h1>Player 2 Name</h1>
+                </div>
+            </div>
+    
+                <div class='zodiacResults' id='zodiacResults2'>
+                    <h2>Your Tic-Tac-Zodiac™ results:</h2>
+                    <p>You know what? It is beets. I've crashed into a beet truck. So you two dig up, dig up dinosaurs? We gotta burn the rain forest, dump toxic waste, pollute the air, and rip up the OZONE! 'Cause maybe if we screw up this planet enough, they won't want it anymore!</p>
+                    <br>
+                        <div id="symbols">
+                            <input type="button" id='startOver' value="Reset Entire Game">
+                        </div>
+                </div>
+
+        </div>
+    </div>
+
 <div id="overlay"></div>
     
     

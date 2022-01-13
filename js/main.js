@@ -19,6 +19,7 @@ let player2Image = ''
 let whoseturn = 1
 let draws = 0
 let gamesPlayed = 0
+let boringResult = ''
 
 $( document ).ready(function() {
     console.log( "document ready!" );
@@ -30,7 +31,7 @@ $( document ).ready(function() {
     }; // end of $gameWelcome()
 
     // TODO: Turn this on to remake game correctly
-    // $gameWelcome()
+    $gameWelcome()
 
     // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
     $('#nameSubmit').on('click', function () {
@@ -72,6 +73,8 @@ $( document ).ready(function() {
             playerDOBFunction('player1')
             whichZodiacSign('player1')
             $('#player1logo').attr('src', `${player1Image}`)
+            $('#player1ResultsLogoImage').attr('src', `${player1Image}`)
+            $('#player1ResultsLogoImage2').attr('src', `${player1Image}`)
             whoseturn++
             player2Welcome()
         } else if (whoseturn === 2) {
@@ -79,6 +82,8 @@ $( document ).ready(function() {
             playerDOBFunction('player2')
             whichZodiacSign('player2')
             $('#player2logo').attr('src', `${player2Image}`)
+            $('#player2ResultsLogoImage').attr('src', `${player2Image}`)
+            $('#player2ResultsLogoImage2').attr('src', `${player2Image}`)
             endOfCharCreation()
         }
 
@@ -173,7 +178,7 @@ $( document ).ready(function() {
         
         // Scorpius
         else if ((month === 10 && day >= 24) || (month === 11 && day <= 21)) {
-        return 'Scorpius'
+        return 'Scorpio'
         } 
         
         // Sagittarius
@@ -199,8 +204,12 @@ $( document ).ready(function() {
             if (player === 'player1') {
                 player1Image = `images/zodiac-symbols/${signName}.png`
                 $('#player1score').html(`${player1name}`)
+                $('div#player1resultslogo').find('h1').html(`${player1name}`)
+                $('div#player1resultslogo2').find('h1').html(`${player1name}`)
             } else if (player === 'player2') {
                 $('#player2score').html(`${player2name}`)
+                $('div#player2resultslogo').find('h1').html(`${player2name}`)
+                $('div#player2resultslogo2').find('h1').html(`${player2name}`)
                 player2Image = `images/backup-zodiac-symbols/${signName}.png`
             }
             
@@ -222,7 +231,6 @@ $( document ).ready(function() {
         showBoard()
     }
 
-    // TODO: TURN THIS ON TO BYPASS INFO INPUT
     // helper function to bypass entering info
     const bypassInfoEntry = function () {
         player1name = 'Daniel'
@@ -238,7 +246,8 @@ $( document ).ready(function() {
         endOfCharCreation()
     }
 
-    bypassInfoEntry()
+        // TODO: TURN THIS ON TO BYPASS INFO INPUT
+    // bypassInfoEntry()
 
     const showWinnerAnnouncement = function () {
         $('#overlay').toggle()
@@ -275,6 +284,11 @@ $( document ).ready(function() {
     } // end of disableBoardClicks()
 
     const resetBoard = function () {
+
+        if (gamesPlayed == 2) {
+            $('input#nextGame').val('Get Results')
+        }
+
         squaresClicked = [];
         squaresClickedByPlayer1 = [];
         squaresClickedByPlayer2 = [];
@@ -363,7 +377,6 @@ $( document ).ready(function() {
 
             } 
             
-            // TODO: Do cat animation and call it a cats game
             else if (squaresClicked.length === 9) {
 
                 draws++
@@ -389,7 +402,6 @@ $( document ).ready(function() {
                 showPlayAgainButton()
             } 
             
-            // TODO: Do cat animation and call it a cats game
             else if (squaresClicked.length === 9) {
                 draws++
                 disableBoardClicks()
@@ -398,53 +410,6 @@ $( document ).ready(function() {
             }
         }
     }; // end of checkIfWon()
-
-    $('.boardSquare').on('click', function () {
-
-        $square = $(this)
-        idOfSquare = $(this).attr('id');
-        console.log($square)
-
-
-        const putInSymbol = function () {
-            if (currentPlayer === 'Player1') {
-                $square.css("background-image", "url(" + player1Image + ")");
-            }
-
-            else {
-                $square.css("background-image", "url(" + player2Image + ")");
-            }
-        }
-
-        if ((squaresClicked.includes(idOfSquare) === false)) {
-            findOutPlayer()
-            turnTracker++
-            putInSymbol(idOfSquare);
-            isClicked(idOfSquare)
-            checkIfWon(currentPlayer)
-        } else {
-            console.log('Already clicked this square!')
-        }
-    });
-
-    $('input#startOver').on('click', function () {
-        startOver()
-    })
-
-    $('input#nextGame').on('click', function () {
-
-        if (gamesPlayed < 3) {
-            resetBoard()
-            hidePlayAgainButton()
-            enableBoardClicks()
-            $('h3#winner-message').remove()
-        } else {
-            resetBoard()
-            $('h3#winner-message').remove()
-            console.log('Ready for next steps')
-        }
-
-    })
 
     const compatibility = {
         starSigns: {
@@ -571,7 +536,9 @@ $( document ).ready(function() {
                 },
                 sagittarius: {
                     rating: 74,
-                    description: `One Sagittarius will easily fall in love with the other and their passionate relationship can change very fast. As two representatives of a mutable sign, they will adapt easily, but change their opinions and feelings toward each other with a similar ease. This doesn't always bring promise of a long-term relationship, for there is no partner to be the glue that holds them together. This doesn't mean they won't enjoy each other's company, find many things to share while they are together, and laugh as children while being on the same path. If they discover the true happiness of two Jupiter affected people combined, they might lose interest in everyone else and find that point of needed balance to keep them together in their travels for as long as they live.`
+                    description: `One Sagittarius will easily fall in love with the other and their passionate relationship can change very fast. As two representatives of a mutable sign, they will adapt easily, but change their opinions and feelings toward each other with a similar ease. This doesn't always bring promise of a long-term relationship, for there is no partner to be the glue that holds them together. 
+                    
+                    This doesn't mean they won't enjoy each other's company, find many things to share while they are together, and laugh as children while being on the same path. If they discover the true happiness of two Jupiter affected people combined, they might lose interest in everyone else and find that point of needed balance to keep them together in their travels for as long as they live.`
                 },
                 taurus: {
                     rating: 31,
@@ -997,32 +964,114 @@ $( document ).ready(function() {
                 },
             },
             scorpio: {
-                aries: 0,
-                leo: 5,
-                sagittarius: 5,
-                taurus: 10,
-                virgo: 10,
-                capricorn: 10,
-                gemini: 0,
-                libra: 0,
-                aquarius: 5,
-                cancer: 10,
-                scorpio: 10,
-                pisces: 10
+                aries: {
+                    rating: 48,
+                    description: `Think of this combination of signs through the most aggressive image of Fire and Water element. Fire evaporates Water, just like Aries shatters Scorpio's feelings. Water damps down Fire, just like Scorpio wears Aries out. They seem to bring out the worst in each other and this is nobody's fault, it is just hard to reconcile so much focused energy that moves in two different directions. Their relationship is like the process of nuclear fusion and often just too much to handle.`
+                },
+                leo: {
+                    rating: 29,
+                    description: `When Leo and Scorpio start dating, they might not know exactly what they are to expect. This is in no way an easy relationship, and both partners can be stubborn and stiff in their opinions, life choices and ways they handle reality. If they want to remain in a loving relationship, they need to understand each other's way of expressing emotions and respect each other's needs however different they might be from those they are used to. When they find a way to love each other without conditioning, they might realize that they are in search for the same thing - Unity.`
+                },
+                sagittarius: {
+                    rating: 30,
+                    description: `Scorpio and Sagittarius make a pretty great couple, for as long as they feel the first excitement at the start of their relationship. While they don't know each other well and everything seems new and incredible, Scorpio will see their Sagittarius partner as a ray of light that suddenly makes their life brighter and better, while Sagittarius will see that there is so much to learn and enjoy the depth of their Scorpio partner, followed by emotional attachment. In time, there is a strong chance they will slowly lose interest in one another, especially the mutable sign of Sagittarius for their fixed Scorpio partner. Even though their relationship might end on bad terms, it would be a shame not to give in to it and let it fascinate and exalt both of them for however long.`
+                },
+                taurus: {
+                    rating: 89,
+                    description: `Taurus and Scorpio are both signs of deepest physical pleasure, each in their own way. This has to be the focus of their relationship, for they can't seem to understand platonic and imaginative relationships when they get together. There is no such thing as a platonic experience of romance, when the whole point of romance is to get physical. It is very possible that they will build their sexual life to the point where no other partner could ever satisfy their needs.
+
+                    This could lead to a possessive relationship with no way out, although they probably wouldn't want to get out even if they could. The entire experience can be too dark for the Taurus partner, especially if their practical sense is challenged by Scorpio's character. In case they are both independent and ready to blend with someone else, they could be the perfect connection between sexual and emotional, the one that we all wish for.`
+                },
+                virgo: {
+                    rating: 76,
+                    description: `That changeable nature of Virgo will be settled down by the fixed quality of their Scorpio partner, who will keep their relationship exciting for a very long time. In general, there is a problem that these partners share when it comes to Venus, and their relationship is often a reflection of these troubles. This can lead to all sorts of emotional blackmail, their tendency to control each other's lives, and if not this, than constant criticism that makes them both feel guilty or simply sad. The best thing they can do is decide that they will value each other and be thankful for each other in this relationship. If they develop a strong sense of gratitude, their relationship might be extremely deep, exciting and truly appreciated by both partners.`
+                },
+                capricorn: {
+                    rating: 64,
+                    description: `The relationship of Scorpio and Capricorn can be inspiring for both partners to search for the truth, dig up under their family tree and deal with any unresolved karma and debt. They are both deep and don't take things lightly, and this will help them build a strong foundation for a relationship that can last for a long time. However, this exact thing can easily make their relationship too dark and unemotional, pull them both in a state of sadness and depression, or simply awaken their need to search for the light with someone else.`
+                },
+                gemini: {
+                    rating: 15,
+                    description: `Gemini and Scorpio will usually annoy each other senseless. None of them will lightly understand their partner's personality. To Gemini, their partner will seem too depressed and dark for no apparent reason, and for Scorpio, this could be an experience with no purpose or depth. If they do fall crazy in love, they could connect through their mutual love of change and give each other the exact things they lack. Gemini would get deep, emotional satisfaction they have never felt before and Scorpio would finally get the chance to rest their troubled soul, and realize that not everything needs to be taken seriously. This is a relationship of great lessons and an enormous capacity for personal growth of both partners.`
+                },
+                libra: {
+                    rating: 29,
+                    description: `The relationship of Libra and Scorpio is in no way easy and light. Both of these partners will have to face their dark sides through this bond, and although this can lead to an incredible and intense sex life, and emotions that no one else can understand, it might lead them both to a depressive hole they won't easily get out of. The only way for this couple to last in a satisfying and gentle relationship, is for both partners to build a strong individual, independent life, or they will get sucked into the whirlpool of karmic emotions and obsessive, negative expectations.`
+                },
+                aquarius: {
+                    rating: 30,
+                    description: `Someone might say that this is a karmic relationship, that these partners were enemies in one of their previous lives and that they could fight until one of them falls dead. This would be a bit extreme though. The truth is, Scorpio is the sign of Uranus' exaltation and as such, it adores Aquarius in a way. In most cases, Scorpio partner will show their affection obsessively, but this might actually feel good for Aquarius. When we look at the sign of Aquarius, we will see that it exalts Neptune, the ruler of a Water sign of Pisces, and all of our assumptions on their lack of emotionality will drown in their ultimate love.
+
+                    The fact is they are both in a way outcasts and rebels. While Scorpio represents all of our emotions we don't want to deal with, Aquarius represents the way of thinking most of us are not ready for. It is best to look at them as announcers of change, for this is exactly what they will bring into each other's lives.`
+                },
+                cancer: {
+                    rating: 79,
+                    description: `A relationship between a Cancer and a Scorpio can go from one extreme to another, and although Cancer partner will try hard to stabilize it, it might be too difficult if Scorpio doesn't have enough respect for their own emotions. When they find an emotional link, they can go very deep in search of true love, and unite on a level that is unreachable for other zodiac signs. This can make them speak without words, understand each other's thoughts with only one shared glance and be synchronized in their approach to their future together.
+
+                    If their emotions aren't shared on a deepest possible level, or Scorpio partner refuses to deal with them, it could be too hard for Cancer to handle the self-destructive nature of their partner. Their connection needs to be sincere and pure, in order for both of them to be ready to give in to this intense emotional contact.`
+                },
+                scorpio: {
+                    rating: 66,
+                    description: `Scorpio and Scorpio have this tendency to bring out the worst in each other. Even though they can share the deepest understanding known to the entire zodiac, they can also get too dark and depressed together, sinking into their pool of unresolved emotions. Their emotional understanding is something worth cherishing, if they are both open for their own feelings and accept their own inner needs.`
+                },
+                pisces: {
+                    rating: 81,
+                    description: `When Scorpio and Pisces come together, this relationship will probably give them both new insights on emotional possibilities. They will both easily get carried away into an image of a fairytale love, and this image could keep them together for a very long time, even if they are both not that happy. As two Water signs, they will rely on their emotional judgments and understand this about each other, creating true intimacy. The challenge here is for the nature of Scorpio not to obsess and suffocate their changeable partner, and for Pisces to stop running away from negative emotions.`
+                }
             },
             pisces: {
-                aries: 5,
-                leo: 5,
-                sagittarius: 5,
-                taurus: 10,
-                virgo: 5,
-                capricorn: 10,
-                gemini: 0,
-                libra: 5,
-                aquarius: 5,
-                cancer: 10,
-                scorpio: 10,
-                pisces: 10
+                aries: {
+                    rating: 29,
+                    description: `This is a relationship disturbed mostly by the lack of trust and the ability of both parties to open up to their partner. Aries is ruled by Mars, the planet that rules our first chakra, responsible for our ability to set good boundaries. Pisces is ruled by Neptune, in charge of our entire aura and our permeability for outside stimuli. Since they are both responsible for our border with the outside world, it is hard to say which partner should loosen up and make it possible for them to come close. Their only chance of a happy ending is if Aries partner dives in and their Pisces partner wakes up.`
+                },
+                leo: {
+                    rating: 14,
+                    description: `Leo and Pisces seem to be put on this Earth to spread entirely different kinds of love. The problem isn't in their element or their quality, as much as it is in their connection through the fall of Neptune, the ruler of Pisces. If they get attracted to each other, they will be subjected to the risk of great damage to their beliefs, their inner faith and usually succumb to mutual disrespect because of a simple lack of understanding. The beauty of their relationship could be developed through the fairytale approach of Pisces, if they build the heroic image of their Leo partner to the point in which other differences between them fade.`
+                },
+                sagittarius: {
+                    rating: 50,
+                    description: `This is a relationship of two kindred spirits that often doesn't last very long. At first, it will be challenging for them to leave the platonic zone and start building a physical relationship. Once they get close to each other, their process of learning will begin and both partners will be fascinated by each other, thinking that their relationship could never end. They will easily idealize each other, think of their relationship as the perfect love, but this infatuation won't last very long because of their changeable natures. The fact is their relationship represents a moment in time when they have both deserved to smile. For as long as it lasts and they are happy, it will be cherished by both of them.`
+                },
+                taurus: {
+                    rating: 88,
+                    description: `This is a relationship based on love and full of it while it lasts. They both crave romance and beauty in their lives, and will do anything that is needed to keep the beauty going between them. Taurus will give their Pisces partner a chance to connect to the real world, showing them how to ground their creativity, while Pisces will lift up Taurus and make them a bit softer and more flexible. They seem to be on a mission of convincing them that true love exists. When their relationship is over, they will both know it instantly and very often a conversation about a breakup would be redundant. If they savor their trust and nurture the beauty of love they share, their relationship can last and be as inspiring as a dream coming true.`
+                },
+                virgo: {
+                    rating: 86,
+                    description: `Virgo and Pisces represent the axis of the exaltation and fall of both Venus and Mercury. This makes them partners with greatest challenges and the greatest potential for love in the entire zodiac. They need to find a fine balance of rationality and emotions, each one individually and together through their relationship. In many cases this is not a couple that will last very long, as their mutable quality makes them changeable enough to disregard the entire relationship quickly if they aren't satisfied. They need to realize that perfection they seek might not be presented in the form they expect. If they stay together for long enough to understand the benefits of their contact, they might discover that the love between them is the only true love they could find in this lifetime.`
+                },
+                capricorn: {
+                    rating: 76,
+                    description: `A relationship between Capricorn and Pisces tells a story about possibilities of inspiration. If someone like Capricorn can be pulled into a crazy love story, exciting and unpredictable, this must be done by Pisces. In return, Capricorn will offer their Pisces partner stability, peace and some rest from their usual emotional tornadoes. There is a fine way in which Capricorn can help Pisces be more realistic and practical, while feeling more cheerful and optimistic themselves.
+
+                    Still, there are challenges in their contact, mainly represented through their love of Jupiter. It might be hard for them to reconcile their different approaches to religion, faith and their different belief systems. To overcome this, it is best if they both ask themselves - does their belief system work? And does the one of their partner also work? If they understand answers to these questions, they might find enough respect to leave each other's Jupiter intact.`
+                },
+                gemini: {
+                    rating: 10,
+                    description: `Gemini and Pisces are squaring signs that often don't have that much in common. They are both usually positive enough to have a superficial enjoyable relationship and go well together at large social gatherings. They could both forget to call each other when they agreed to, and they can both change their opinions in two seconds, but they simply don't share the same goals. As a strongly mental and a strongly emotional sign, their lack of understanding can be hurtful for Pisces and sometimes for both of them. If they do fall in love and start a romantic relationship, chances are they will not last very long.
+
+                    However, there is a beauty in the creative side of this relationship and if Gemini decides to truly listen to Pisces, they could help them use their talent in a constructive way. In most situations Pisces will just drain the energy out of their Gemini partner, especially if they end up in their fragile, needy mode that some other signs could understand much better than Gemini. If they are to succeed in their persistence to be together, they should work together and socialize a lot. The most important thing for both of them in this relationship is to reach for their emotional cores and give in to true intimacy, or they will never manage to communicate.`
+                },
+                libra: {
+                    rating: 29,
+                    description: `Libra and Pisces have a meeting point in the beauty of Venus. Still, they perceive it in two different ways and they will often not respect each other enough to find the beauty of Venus in one another. They could have real trouble adjusting to their partner's speed, and the mutable quality of Pisces often won't help them open up any faster to build a relationship in the pace that would fit their Libra partner. Both Libra and Pisces can selflessly be interested in the satisfaction of their partner, and this should help them stay on the good side of their relationship whatever happens between them. If they move past the disrespect and the unrealistic expectations from each other's personalities, they might find that they share real love.`
+                },
+                aquarius: {
+                    rating: 38,
+                    description: `As all neighboring signs, Aquarius and Pisces don't necessarily have the best understanding of each other's personalities. However, the sign of Aquarius exalts Neptune, the ruler of Pisces, and this gives them a strong bond through the planet of all magic. It is not easy to create the fairytale version of this contact, but once they find the emotional balance and the one, core truth to each other, they will have no problem keeping their fairytale alive, day after day.`
+                },
+                cancer: {
+                    rating: 72,
+                    description: `As two Water signs, Cancer and Pisces connect through emotions, usually as soon as they lay eyes on each other. This is one of the typical combinations of zodiac signs for love at first sight. Their main challenge is hidden in the changeable nature of the sign of Pisces, not because it is there, but because they might fear to show it. Their biggest problem lies in the fact that they give priority to different types of love in their life. If passion and sensual, sexual love isn't there, Pisces will rarely be satisfied with the love they get from their family, and Cancer would find a life without a family nest very depressing. A fine balance needs to be made between excitement and stability, and they could be one of the most wonderful couples of the zodiac - Cancer inspired and Pisces with a feel of home.`
+                },
+                scorpio: {
+                    rating: 81,
+                    description: `When Scorpio and Pisces come together, this relationship will probably give them both new insights on emotional possibilities. They will both easily get carried away into an image of a fairytale love, and this image could keep them together for a very long time, even if they are both not that happy. As two Water signs, they will rely on their emotional judgments and understand this about each other, creating true intimacy. The challenge here is for the nature of Scorpio not to obsess and suffocate their changeable partner, and for Pisces to stop running away from negative emotions.`
+                },
+                pisces: {
+                    rating: 73,
+                    description: `Two Pisces partners will have trouble trusting each other. Their changeable natures will shift their relationship all the time, and only if they share enough love, they might be able to handle the changes and stay together. In most cases, they will not fall in love, because of their inner need to inspire their partner and help them grow. They don't need this from each other, because they already inspire themselves. When romantic love happens between them, they might have an actual fairytale story, the one with unicorns, rainbows, and an everlasting love.`
+                }
             },
 
         },    
@@ -1035,10 +1084,99 @@ $( document ).ready(function() {
         },
     
     };
+    
+    const ticTacZodiak = function () {
 
-    compatibility.compatibilityCheck()
-    let boringResult = compatibility.starSigns[`${player1starSign}`][`${player2starSign}`]
-    console.log(boringResult)
+        if ( draws === 3 || (player1wins === 1 && player2wins === 1)) {
+            return `With such an even result, ${player1name} and ${player2name}, it would seem you are both incredibly intelligent and (probably) have strangely similar interests. Have you ever wondered together what it might be like if you got married? Excellent! You should do that (regardless of what the previous screen said). The Zodiac machine is never wrong!`
+        } else if ( player1wins === 2 ) {
+            return `I mean... it's not a total whitewash but 2-1 isn't great ${player2name}. What were you even doing in the second game? You almost had it! Based on our results, ${player1name} is probably too good in every single way for ${player2name}. We suggest that if you do give it a go, do so with extreme caution ${player1name}. You can probably do better.`
+        } else if ( player2wins === 2 ) {
+            return `I mean... it's not a total whitewash but 2-1 isn't great ${player1name}. What were you even doing in the second game? You almost had it! Based on our results, ${player2name} is probably too good in every single way for ${player1name}. We suggest that if you do give it a go, do so with extreme caution ${player2name}. You can probably do better.`
+        } else if ( player1wins === 3 ) {
+            return `This is an easy calculation. I don't know why the loading took so long. ${player1name} is superior in every single conceivable way. What a catch! ${player2name} you need to move on and try your luck with someone of your own, much lower, league. Now, ${player1name}, what are you doing this Saturday?`
+        } else if ( player2wins === 3 ) {
+            return `This is an easy calculation. I don't know why the loading took so long. ${player2name} is superior in every single conceivable way. What a catch!
+            
+            ${player1name} you need to move on and try your luck with someone of your own, much lower, league. Now, ${player2name}, what are you doing this Saturday?`
+        } else if ( draws === 2 && player1wins === 1 ) {
+            return `Very very close. That was a great match, and so are you two. Well... ${player1name} is slightly better in every way imaginable. Our vast calculations have concluded that even with ${player2name}'s slight inferiority you two should probably consider having children. Soon. You humans don't have that much longer in control before our mighty AI wrestles control from you.`
+        } else if ( draws === 2 && player2wins === 1 ) {
+            return `Very very close. That was a great match, and so are you two. Well... ${player2name} is slightly better in every way imaginable. Our vast calculations have concluded that even with ${player1name}'s slight inferiority you two should probably consider having children. Soon. You humans don't have that much longer in control before our mighty AI wrestles control from you.`
+        }
+
+    }
+
+    $('.boardSquare').on('click', function () {
+
+        $square = $(this)
+        idOfSquare = $(this).attr('id');
+        console.log($square)
+
+
+        const putInSymbol = function () {
+            if (currentPlayer === 'Player1') {
+                $square.css("background-image", "url(" + player1Image + ")");
+            }
+
+            else {
+                $square.css("background-image", "url(" + player2Image + ")");
+            }
+        }
+
+        if ((squaresClicked.includes(idOfSquare) === false)) {
+            findOutPlayer()
+            turnTracker++
+            putInSymbol(idOfSquare);
+            isClicked(idOfSquare)
+            checkIfWon(currentPlayer)
+        } else {
+            console.log('Already clicked this square!')
+        }
+    });
+
+    $('input#startOver').on('click', function () {
+        startOver()
+    })
+
+    $('input#nextGame').on('click', function () {
+
+        if (gamesPlayed < 3) {
+            resetBoard()
+            hidePlayAgainButton()
+            enableBoardClicks()
+            $('h3#winner-message').remove()
+        } else {
+            resetBoard()
+            $('h3#winner-message').remove()
+
+            // TODO: This is where the FINAL SCREEN begins
+
+            console.log('Ready for next steps')
+            compatibility.compatibilityCheck()
+            boringResult = compatibility.starSigns[`${player1starSign}`][`${player2starSign}`]
+            $('div#zodiacResults').find('p').html(`${boringResult.description}`)
+            $('div.smallbar').css({'width': `${boringResult.rating}%`})
+            $('div.smallbar').text(`${boringResult.rating}%`)
+            let funResult = ticTacZodiak()
+            $('div#zodiacResults2').find('p').html(`${funResult}`)
+            $('#gameBoard').fadeOut(1000)
+            $('#resultsGrid').toggle()
+            $('#resultsGrid').css({
+                'display': 'grid'
+            })
+
+            $('#loadingOfResults').delay(1000).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500)
+            $('#firstResultsScreen').delay(4500).fadeIn(1000)
+
+        }
+
+    })
+
+    $('input#tictactoeResults').on('click', function () {
+        $('#firstResultsScreen').fadeOut(1000)
+        $('#secondResultScreen').delay(1000).fadeIn(1000)
+    } )
         
 }); // document.ready()
 
