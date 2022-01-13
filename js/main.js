@@ -5,45 +5,51 @@ let squaresClickedByPlayer1 = [];
 let squaresClickedByPlayer2 = [];
 let player1wins = 0;
 let player2wins = 0;
-let currentPlayer = 'Player1'
-let player1name = ''
-let player1dobStringArray = []
-let player1dob = []
-let player1starSign = ''
-let player1Image = ''
-let player2name = ''
-let player2dobStringArray = []
-let player2dob = []
-let player2starSign = ''
-let player2Image = ''
-let whoseturn = 1
-let draws = 0
-let gamesPlayed = 0
-let boringResult = ''
+let currentPlayer = 'Player1';
+let player1name = '';
+let player1dobStringArray = [];
+let player1dob = [];
+let player1starSign = '';
+let player1Image = '';
+let player2name = '';
+let player2dobStringArray = [];
+let player2dob = [];
+let player2starSign = '';
+let player2Image = '';
+let whoseturn = 1;
+let draws = 0;
+let gamesPlayed = 0;
+let boringResult = '';
 
 $( document ).ready(function() {
+
     console.log( "document ready!" );
 
     // this is just the Initial Fade In of the title and then the name form
     const $gameWelcome = function () {
-        $('#charCreationTitle').fadeIn(1000).fadeOut(500)
-        $('#nameDiv').delay(1750).fadeIn(500)
+
+        $('#charCreationTitle').fadeIn(1000).fadeOut(500);
+        $('#nameDiv').delay(1750).fadeIn(500);
+
     }; // end of $gameWelcome()
 
-    // TODO: Turn this on to remake game correctly
-    $gameWelcome()
+    // FIXME: Turn this on to remake game correctly
+    $gameWelcome();
 
     // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
     $('#nameSubmit').on('click', function () {
 
+        // this just clears the DOB form for player 2 when they go to enter it
+        $('input#dobInput').val('');
+
         // whoseturn simply finds out if this is player 1 or player 2 entering their name by working out how many times this tracker has ticked up (or at all)
-        $('input#dobInput').val('')
         if (whoseturn === 1) {
-            player1name = $(this).prev().val()
-            sayHelloToName('player1')
+            player1name = $(this).prev().val();
+            sayHelloToName('player1');
+
         } else if (whoseturn === 2) {
-            player2name = $(this).prev().val()
-            sayHelloToName('player2')
+            player2name = $(this).prev().val();
+            sayHelloToName('player2');
         }
     }); // end of nameSubmit onClick
 
@@ -51,80 +57,102 @@ $( document ).ready(function() {
     const sayHelloToName = function (player) {
 
         // fade out the name form
-        $('#nameDiv').fadeOut(500)
+        $('#nameDiv').fadeOut(500);
 
         // it will now say hi to whichever play it is
-
         if (player === 'player1') {
-            $('h1.logoSelectionWelcome').html(`Hello ${player1name}`)
+            $('h1.logoSelectionWelcome').html(`Hello ${player1name}`);
+
         } else if (player === 'player2') {
-            $('h1.logoSelectionWelcome').html(`Hello ${player2name}`)
+            $('h1.logoSelectionWelcome').html(`Hello ${player2name}`);
         }
 
-        $('#chooseLogo').delay(750).fadeIn(1000)
+        // the chooseLogo section is where they submit their DOB
+        $('#chooseLogo').delay(750).fadeIn(1000);
     }; // end of sayHelloToName()
 
     // This is the form that turns up asking players for their DOB. It is going to set the players DOB as a string and begin the next few functions
     $('#dobSubmit').on('click', function (eventObject) {
-        let dob = $(this).prev().val()
-        
-        if (whoseturn === 1) {
-            player1dobStringArray = dob.split('-')
-            playerDOBFunction('player1')
-            whichZodiacSign('player1')
-            $('#player1logo').attr('src', `${player1Image}`)
-            $('#player1ResultsLogoImage').attr('src', `${player1Image}`)
-            $('#player1ResultsLogoImage2').attr('src', `${player1Image}`)
-            whoseturn++
-            player2Welcome()
-        } else if (whoseturn === 2) {
-            player2dobStringArray = dob.split('-')
-            playerDOBFunction('player2')
-            whichZodiacSign('player2')
-            $('#player2logo').attr('src', `${player2Image}`)
-            $('#player2ResultsLogoImage').attr('src', `${player2Image}`)
-            $('#player2ResultsLogoImage2').attr('src', `${player2Image}`)
-            endOfCharCreation()
-        }
 
+        // this is going to set their DOB as a local variable
+        let dob = $(this).prev().val();
+        
+        // this is actually going to do quite a lot! This is if it is player 1:
+        if (whoseturn === 1) {
+            player1dobStringArray = dob.split('-');
+            playerDOBFunction('player1');
+            whichZodiacSign('player1');
+
+            // I use this moment to actually update the players image across all sections. FIXME: I could improve this by just using class.
+            $('#player1logo').attr('src', `${player1Image}`);
+            $('#player1ResultsLogoImage').attr('src', `${player1Image}`);
+            $('#player1ResultsLogoImage2').attr('src', `${player1Image}`);
+
+            // I have to use whoseturn here instead of name as I don't know player2 yet.
+            whoseturn++;
+            player2Welcome();
+
+        } else if (whoseturn === 2) {
+            player2dobStringArray = dob.split('-');
+            playerDOBFunction('player2');
+            whichZodiacSign('player2');
+
+            // FIXME: Just use class.
+            $('#player2logo').attr('src', `${player2Image}`);
+            $('#player2ResultsLogoImage').attr('src', `${player2Image}`);
+            $('#player2ResultsLogoImage2').attr('src', `${player2Image}`);
+            endOfCharCreation();
+        }
     }); // end of dobSubmit onClick
 
     // this is just the Initial Fade In of the title and then the name form
     const player2Welcome = function () {
-        $('#nameInput').val('')
-        $('#howItWorks').css({'display': 'none'})
-        $('#chooseLogo').fadeOut(500)
-        let label = $('div#nameDiv').children()[1]
-        $(label).html('And player 2 - your name is:')
-        $('#nameDiv').delay(750).fadeIn(750)
+
+        // reset the name form for player 2
+        $('#nameInput').val('');
+
+        // move on to the player 2 section of Character Creation
+        $('#howItWorks').css({'display': 'none'});
+        $('#chooseLogo').fadeOut(500);
+
+        // say hi to the player 2
+        let label = $('div#nameDiv').children()[1];
+        $(label).html(`And player 2, what's your name?`);
+        $('#nameDiv').delay(750).fadeIn(750);
     }; // end of player2Welcome()
 
     // this function really only turns their DOB string array in to an actual numbered array for later use. This is a helper function.
     const playerDOBFunction = function(player) {
 
         if (player === 'player1') {
-            player1dob = player1dobStringArray.map(Number)
+            player1dob = player1dobStringArray.map(Number);
+
         } else if (player === 'player2') {
-            player2dob = player2dobStringArray.map(Number)
+            player2dob = player2dobStringArray.map(Number);
         }
         
     }; // end of playerDOBFunction
 
-    // helper function to return Star Sign
-
+    // helper function to return Star Sign as a text string
     const getSign = function (player) {
 
         let month;
         let day;
 
         if (player === 'player1') {
-            month = player1dob[1]
-            day = player1dob[2]
-        } 
-        else if (player === 'player2') {
-            month = player2dob[1]
-            day = player2dob[2]
+
+            month = player1dob[1];
+            day = player1dob[2];
+
         }
+        else if (player === 'player2') {
+
+            month = player2dob[1];
+            day = player2dob[2];
+
+        };
+
+        // FIXME: I could get rid of 1 line later by just making the return values lower case here
 
         //Capricorn
         if ((month === 12 && day >= 22) || (month === 01 && day <= 19)) {
@@ -184,134 +212,177 @@ $( document ).ready(function() {
         // Sagittarius
         else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
         return 'Sagittarius'
-        }       
-    }
+        };   
+    }; // end of getSign()
 
     // the actual function of assigning the sign to an image and parsing that image as the image the player uses
-
     const whichZodiacSign = function (player) {
 
         let signName;
         
         if (player === 'player1') {
-            signName = getSign('player1')
+            signName = getSign('player1');
         } 
+
         else if (player === 'player2') {
-            signName = getSign('player2')
+            signName = getSign('player2');
         }
 
+        // a little internal function that is going to set the players name in all of the correct places. Probably should be called apply name haha! It does apply the image too though.
         const applyImage = function (signName) {
-            if (player === 'player1') {
-                player1Image = `images/zodiac-symbols/${signName}.png`
-                $('#player1score').html(`${player1name}`)
-                $('div#player1resultslogo').find('h1').html(`${player1name}`)
-                $('div#player1resultslogo2').find('h1').html(`${player1name}`)
-            } else if (player === 'player2') {
-                $('#player2score').html(`${player2name}`)
-                $('div#player2resultslogo').find('h1').html(`${player2name}`)
-                $('div#player2resultslogo2').find('h1').html(`${player2name}`)
-                player2Image = `images/backup-zodiac-symbols/${signName}.png`
-            }
-            
-        }  
 
-        applyImage(signName)
+            if (player === 'player1') {
+
+                player1Image = `images/zodiac-symbols/${signName}.png`;
+                $('#player1score').html(`${player1name}`);
+                $('div#player1resultslogo').find('h1').html(`${player1name}`);
+                $('div#player1resultslogo2').find('h1').html(`${player1name}`);
+
+            } else if (player === 'player2') {
+
+                $('#player2score').html(`${player2name}`);
+                $('div#player2resultslogo').find('h1').html(`${player2name}`);
+                $('div#player2resultslogo2').find('h1').html(`${player2name}`);
+                player2Image = `images/backup-zodiac-symbols/${signName}.png`;
+            }
+        };
+
+        applyImage(signName);
 
     }; // end of whichZodiacSign()
 
+    // un-hides the game board & also changes it to a grid (as it was becoming a block for some reason I couldn't fathom)
     const showBoard = function () {
+
         $('.tictactoeBoard').fadeIn(1500).css({
             'display': 'grid',
         })
-    }
+    }; // end of showBoard()
 
+    // now hides CharCreation and brings the loading screen up
     const endOfCharCreation = function () {
-        $('#charCreation').fadeOut(1000)
-        $('#gameBoard').delay(1000).fadeIn(1000)
-        showBoard()
-    }
 
-    // helper function to bypass entering info
+        $('#charCreation').fadeOut(1000);
+        $('#gameBoard').delay(1000).fadeIn(1000);
+        showBoard();
+
+    }; // end of endOfCharCreation()
+
+    // helper function to bypass entering info. auto-fills out the info for me.
     const bypassInfoEntry = function () {
-        player1name = 'Daniel'
-        player2name = 'Prabina'
-        player2dobStringArray = ['1988', '10', '14']
-        player1dobStringArray = ['1989', '04', '18']
-        playerDOBFunction('player1')
-        whichZodiacSign('player1')
-        $('#player1logo').attr('src', `${player1Image}`)
-        playerDOBFunction('player2')
-        whichZodiacSign('player2')
-        $('#player2logo').attr('src', `${player2Image}`)
-        endOfCharCreation()
-    }
 
-        // TODO: TURN THIS ON TO BYPASS INFO INPUT
+        player1name = 'Daniel';
+        player2name = 'Prabina';
+
+        player2dobStringArray = ['1988', '10', '14'];
+        player1dobStringArray = ['1989', '04', '18'];
+
+        playerDOBFunction('player1');
+        whichZodiacSign('player1');
+        $('#player1logo').attr('src', `${player1Image}`);
+
+        playerDOBFunction('player2');
+        whichZodiacSign('player2');
+        $('#player2logo').attr('src', `${player2Image}`);
+
+        endOfCharCreation();
+
+    }; // end of bypassInfoEntry()
+
+    // TODO: TURN THIS ON TO BYPASS INFO INPUT
     // bypassInfoEntry()
 
+    // this is the little 'Player 1 won this round' button
     const showWinnerAnnouncement = function () {
-        $('#overlay').toggle()
-        $('.fixedContainer').toggle()
-    }
 
+        $('#overlay').toggle();
+        $('.fixedContainer').toggle();
+
+    }; // end of showWinnerAnnouncement()
+
+    // a helper function to understand which players turn it currently is. Uses even & odd numbers to determine.
     const findOutPlayer = function () {
+
         if (turnTracker % 2 !== 0) {
-            currentPlayer = 'Player1'
+
+            currentPlayer = 'Player1';
             return currentPlayer;
+
         } else {
-            currentPlayer = 'Player2'
+
+            currentPlayer = 'Player2';
             return currentPlayer;
         }
-    } // end of findOutPlayer
+    }; // end of findOutPlayer
 
+    // another helper function. It helps by constructing an array with the squares clicked by each player.
     const isClicked = function(squareNumber) {
+
         squaresClicked.push(squareNumber);
+
         if (currentPlayer === 'Player1') {
-            squaresClickedByPlayer1.push(squareNumber)
-            console.log('clicked by player 1: ', squaresClickedByPlayer1)
+            squaresClickedByPlayer1.push(squareNumber);
+
         } else {
-            squaresClickedByPlayer2.push(squareNumber)
-            console.log('clicked by player 2: ', squaresClickedByPlayer2)
+            squaresClickedByPlayer2.push(squareNumber);
         }
-    } // end of isClicked
+    }; // end of isClicked()
 
+    // this basically just disable board clicks once Game 3 is over!
     const disableBoardClicks = function () {
-        $('.boardSquare').css({'pointer-events': 'none'})
-    } // end of disableBoardClicks()
 
+        $('.boardSquare').css({'pointer-events': 'none'});
+
+    }; // end of disableBoardClicks()
+
+    // re-enables board clicks in case I need it
     const enableBoardClicks = function () {
-        $('.boardSquare').css({'pointer-events': 'all'})
-    } // end of disableBoardClicks()
+        $('.boardSquare').css({'pointer-events': 'all'});
 
+    }; // end of disableBoardClicks()
+
+    // completely resets game state and initiates character creation
     const resetBoard = function () {
 
+        // changes the button that pops up after game 2 to Get Results rather than 'Play Next Game'
         if (gamesPlayed == 2) {
-            $('input#nextGame').val('Get Results')
+            $('input#nextGame').val('Get Results');
         }
 
+        // all the necessary changes that need to take place
         squaresClicked = [];
         squaresClickedByPlayer1 = [];
         squaresClickedByPlayer2 = [];
+
         currentPlayer = 'Player1';
         turnTracker = 1;
-        $('.boardSquare').css({ 'backgroundImage': 'none' })
-        showWinnerAnnouncement()
-    } // end of resetBoard()
 
+        $('.boardSquare').css({ 'backgroundImage': 'none' });
+        showWinnerAnnouncement();
+
+    }; // end of resetBoard()
+
+    // complete start over by reloading page
     const startOver = function () {
-        window. location. reload()
+        window. location. reload();
     } // end of startOver()
 
+    // the following two functions simply show the next game button and hide them respectively
     const showPlayAgainButton = function () {
+
         $('input#nextGame').fadeIn().css({
             'display': 'block',
         })
-    }
+
+    };
 
     const hidePlayAgainButton = function () {
-        $('input#nextGame').fadeOut()
-    }
 
+        $('input#nextGame').fadeOut()
+
+    };
+
+    // ticks the counter up for games played and announces winner 
     const announceWinner = function (h3node, winner, wins) {
 
         const showWinner = function (h3node, winner, wins) {
@@ -319,34 +390,40 @@ $( document ).ready(function() {
             gamesPlayed++
 
             if (winner !== 'draw') {
+
                 if (currentPlayer === 'Player1') {
-                    $(`h4#${h3node}`).html(`Wins: ${wins}`)
-                    let $winnerMessage = $('<h3 id="winner-message">')
-                    $winnerMessage.html(`${player1name} wins this game!`)
-                    $('div#winnerAnnouncement').prepend($winnerMessage)
+                    $(`h4#${h3node}`).html(`Wins: ${wins}`);
+                    let $winnerMessage = $('<h3 id="winner-message">');
+                    $winnerMessage.html(`${player1name} wins this game!`);
+                    $('div#winnerAnnouncement').prepend($winnerMessage);
+
                 } else {
-                    $(`h4#${h3node}`).html(`Wins: ${wins}`)
-                    let $winnerMessage = $('<h3 id="winner-message">')
-                    $winnerMessage.html(`${player2name} wins this game!`)
-                    $('div#winnerAnnouncement').prepend($winnerMessage)
+                    $(`h4#${h3node}`).html(`Wins: ${wins}`);
+                    let $winnerMessage = $('<h3 id="winner-message">');
+                    $winnerMessage.html(`${player2name} wins this game!`);
+                    $('div#winnerAnnouncement').prepend($winnerMessage);
                 }
+
             } else {
-                $('.draws').html(`Draws: ${draws}`)
-                let $drawMessage = $('<h3 id="winner-message">')
-                $drawMessage.html("It's a draw!")
-                $('div#winnerAnnouncement').prepend($drawMessage)
+                $('.draws').html(`Draws: ${draws}`);
+                let $drawMessage = $('<h3 id="winner-message">');
+                $drawMessage.html("It's a draw!");
+                $('div#winnerAnnouncement').prepend($drawMessage);
             }
             
-        }
+        };
 
-        showWinnerAnnouncement()
-        // announceWinner('player1score', 'Player 1', player1wins)
+        showWinnerAnnouncement();
 
-        showWinner(h3node, winner, wins)
+        // announceWinner('player1score', 'Player 1', player1wins) for example
+        showWinner(h3node, winner, wins);
 
-        showPlayAgainButton()
-    }
+        showPlayAgainButton();
 
+    };
+
+    // simply checks if either player has won that turn and initiates relevant functions
+    // FIXME: Boil this down to a single set of checks
     const checkIfWon = function (player) {
 
         if (player === 'Player1') {
@@ -371,17 +448,17 @@ $( document ).ready(function() {
             
             {
 
-                player1wins++
-                disableBoardClicks()
-                announceWinner('player1wins', 'Player 1', player1wins)
+                player1wins++;
+                disableBoardClicks();
+                announceWinner('player1wins', 'Player 1', player1wins);
 
             } 
             
             else if (squaresClicked.length === 9) {
 
-                draws++
-                disableBoardClicks()
-                announceWinner('','draw','')
+                draws++;
+                disableBoardClicks();
+                announceWinner('','draw','');
             }
 
         } else {
@@ -396,21 +473,24 @@ $( document ).ready(function() {
             || (squaresClickedByPlayer2.includes('square7') && squaresClickedByPlayer2.includes('square8') && squaresClickedByPlayer2.includes('square9'))
             ) {
 
-                player2wins++
-                disableBoardClicks()
-                announceWinner('player2wins', 'Player 2', player2wins)
-                showPlayAgainButton()
+                player2wins++;
+                disableBoardClicks();
+                announceWinner('player2wins', 'Player 2', player2wins);
+                showPlayAgainButton();
             } 
             
             else if (squaresClicked.length === 9) {
-                draws++
-                disableBoardClicks()
-                announceWinner('','draw','')
-                showPlayAgainButton()
+
+                draws++;
+                disableBoardClicks();
+                announceWinner('','draw','');
+                showPlayAgainButton();
+
             }
         }
     }; // end of checkIfWon()
 
+    // an object that contains all of the results for the astrology element of the game
     const compatibility = {
         starSigns: {
             aries: {
@@ -1085,97 +1165,130 @@ $( document ).ready(function() {
     
     };
     
+    // generates results on the game-state versus how compatible the players are
     const ticTacZodiak = function () {
 
         if ( draws === 3 || (player1wins === 1 && player2wins === 1)) {
             return `With such an even result, ${player1name} and ${player2name}, it would seem you are both incredibly intelligent and (probably) have strangely similar interests. Have you ever wondered together what it might be like if you got married? Excellent! You should do that (regardless of what the previous screen said). The Zodiac machine is never wrong!`
-        } else if ( player1wins === 2 ) {
+        } 
+        else if ( player1wins === 2 ) {
             return `I mean... it's not a total whitewash but 2-1 isn't great ${player2name}. What were you even doing in the second game? You almost had it! Based on our results, ${player1name} is probably too good in every single way for ${player2name}. We suggest that if you do give it a go, do so with extreme caution ${player1name}. You can probably do better.`
-        } else if ( player2wins === 2 ) {
+        } 
+        else if ( player2wins === 2 ) {
             return `I mean... it's not a total whitewash but 2-1 isn't great ${player1name}. What were you even doing in the second game? You almost had it! Based on our results, ${player2name} is probably too good in every single way for ${player1name}. We suggest that if you do give it a go, do so with extreme caution ${player2name}. You can probably do better.`
-        } else if ( player1wins === 3 ) {
+        } 
+        else if ( player1wins === 3 ) {
             return `This is an easy calculation. I don't know why the loading took so long. ${player1name} is superior in every single conceivable way. What a catch! ${player2name} you need to move on and try your luck with someone of your own, much lower, league. Now, ${player1name}, what are you doing this Saturday?`
-        } else if ( player2wins === 3 ) {
+        } 
+        else if ( player2wins === 3 ) {
             return `This is an easy calculation. I don't know why the loading took so long. ${player2name} is superior in every single conceivable way. What a catch!
             
             ${player1name} you need to move on and try your luck with someone of your own, much lower, league. Now, ${player2name}, what are you doing this Saturday?`
-        } else if ( draws === 2 && player1wins === 1 ) {
+        } 
+        else if ( draws === 2 && player1wins === 1 ) {
             return `Very very close. That was a great match, and so are you two. Well... ${player1name} is slightly better in every way imaginable. Our vast calculations have concluded that even with ${player2name}'s slight inferiority you two should probably consider having children. Soon. You humans don't have that much longer in control before our mighty AI wrestles control from you.`
-        } else if ( draws === 2 && player2wins === 1 ) {
+        } 
+        else if ( draws === 2 && player2wins === 1 ) {
             return `Very very close. That was a great match, and so are you two. Well... ${player2name} is slightly better in every way imaginable. Our vast calculations have concluded that even with ${player1name}'s slight inferiority you two should probably consider having children. Soon. You humans don't have that much longer in control before our mighty AI wrestles control from you.`
         }
 
-    }
+    };
 
+    // governs what happens when a board square is clicked
     $('.boardSquare').on('click', function () {
 
-        $square = $(this)
+        $square = $(this);
         idOfSquare = $(this).attr('id');
-        console.log($square)
 
-
+        // inserts symbol in to board square dependent on players turn
         const putInSymbol = function () {
+
             if (currentPlayer === 'Player1') {
+
                 $square.css("background-image", "url(" + player1Image + ")");
             }
 
             else {
+
                 $square.css("background-image", "url(" + player2Image + ")");
+
             }
         }
 
+        // checks to see if that board square had been clicked before. If it hasn't, it will ID plater, increase the turn, insert correct symbol in to square and register the click of that square so it can't be clicked again. It will then check if this was a winning move.
         if ((squaresClicked.includes(idOfSquare) === false)) {
+
             findOutPlayer()
             turnTracker++
+
             putInSymbol(idOfSquare);
             isClicked(idOfSquare)
+
             checkIfWon(currentPlayer)
-        } else {
-            console.log('Already clicked this square!')
-        }
+
+        };
     });
 
+    // just the on click event for the start over function
     $('input#startOver').on('click', function () {
-        startOver()
+
+        startOver();
+
     })
 
+    // when 'Next Game' button is clicked, it resets the board and shows/hides all relevant functionality. In the case it is the 3rd and final game, it will also initialise the final section of the game: the results.
     $('input#nextGame').on('click', function () {
 
+        // if the game needs to be continued
         if (gamesPlayed < 3) {
-            resetBoard()
-            hidePlayAgainButton()
-            enableBoardClicks()
-            $('h3#winner-message').remove()
+
+            resetBoard();
+
+            hidePlayAgainButton();
+
+            enableBoardClicks();
+
+            $('h3#winner-message').remove();
+
+        // if the game is over, lets initialise the Results
         } else {
-            resetBoard()
-            $('h3#winner-message').remove()
 
-            // TODO: This is where the FINAL SCREEN begins
+            resetBoard();
 
-            console.log('Ready for next steps')
-            compatibility.compatibilityCheck()
-            boringResult = compatibility.starSigns[`${player1starSign}`][`${player2starSign}`]
-            $('div#zodiacResults').find('p').html(`${boringResult.description}`)
-            $('div.smallbar').css({'width': `${boringResult.rating}%`})
-            $('div.smallbar').text(`${boringResult.rating}%`)
-            let funResult = ticTacZodiak()
-            $('div#zodiacResults2').find('p').html(`${funResult}`)
-            $('#gameBoard').fadeOut(1000)
-            $('#resultsGrid').toggle()
+            $('h3#winner-message').remove();
+
+            // generates astrology results
+            compatibility.compatibilityCheck();
+            boringResult = compatibility.starSigns[`${player1starSign}`][`${player2starSign}`];
+
+            // puts the progress bar in the first results screen
+            $('div#zodiacResults').find('p').html(`${boringResult.description}`);
+            $('div.smallbar').css({'width': `${boringResult.rating}%`});
+            $('div.smallbar').text(`${boringResult.rating}%`);
+
+            // puts in the game-based results in the very final page of results
+            let funResult = ticTacZodiak();
+            $('div#zodiacResults2').find('p').html(`${funResult}`);
+
+            // showing & hiding the correct pages to show results
+            $('#gameBoard').fadeOut(1000);
+            $('#resultsGrid').toggle();
             $('#resultsGrid').css({
                 'display': 'grid'
-            })
+            });
+            $('#loadingOfResults').delay(1000).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500);
+            $('#firstResultsScreen').delay(4500).fadeIn(1000);
 
-            $('#loadingOfResults').delay(1000).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500)
-            $('#firstResultsScreen').delay(4500).fadeIn(1000)
+        };
 
-        }
+    });
 
-    })
-
+    // shows the relevant results sections
     $('input#tictactoeResults').on('click', function () {
+
         $('#firstResultsScreen').fadeOut(1000)
         $('#secondResultScreen').delay(1000).fadeIn(1000)
+
     } )
         
 }); // document.ready()

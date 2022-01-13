@@ -205,7 +205,7 @@ h, p, div, a, input, li {
 }
 
 div#charCreation {
-    padding: 0 5%;
+    padding: 5% 5%;
     height: 80vh;
     display: grid;
     align-items: center;
@@ -497,8 +497,7 @@ div#gameStats h3 {
 
 }
 
-
-/* got fed up of CSS and found this overlay on WS3 schools haha */
+/* found this overlay online */
 #overlay {
     position: fixed; /* Sit on top of the page content */
     display: none; /* Hidden by default */
@@ -512,8 +511,6 @@ div#gameStats h3 {
     z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
   }
-
-
 
 /* @media (min-width: 90em) {
     .pagelayout {
