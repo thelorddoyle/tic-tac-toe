@@ -463,10 +463,6 @@ div#gameStats h3 {
         margin-top: 0px;
     }
 
-    #displayAds {
-        /* grid-auto-rows: minmax(150px, auto)  */
-    }
-
     .displayAd img {
         display: inline-block;
         width: 40vw;

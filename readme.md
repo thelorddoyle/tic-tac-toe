@@ -41,7 +41,7 @@ Your app must:
 
 **3.** I wanted it to be fun and relatable for many people.
 
-### **The Game**
+### **The Game & Main Features**
 
 I use star signs and 'compatibility' as the means for shareability and try to make the web app attractive and easy to use.
 
@@ -53,14 +53,20 @@ The game takes 2 human player's names and birth dates, assigns them a logo based
 
 And I am working on making it able to be played over the network but have not yet finished this.
 
-• screenshot is nice to have
+### **Screenshots**
 
-• description of main features
+### _**Gameplay**_
 
-• list of any known bugs
+![This is an image](images/readme-images/gameplay.png)
 
-• tech used (JS, HTML, CSS, jQuery)
+### _**Example Astrology Results**_
+![This is an image](images/readme-images/astrological-results.png)
 
-• anything else you want to record about the project or the experience
+### _**Example Gameplay Result**_
+![This is an image](images/readme-images/zodiac-results.png)
 
-WishList
+## **Known Bugs**
+
+## **Tech Used**
+
+## **WishList**
