@@ -28,8 +28,8 @@ $( document ).ready(function() {
     // this is just the Initial Fade In of the title and then the name form
     const $gameWelcome = function () {
 
-        $('#charCreationTitle').fadeIn(1000).fadeOut(500);
-        $('#nameDiv').delay(1750).fadeIn(500);
+        $('#charCreationTitle').fadeIn(2000).fadeOut(1000);
+        $('#nameDiv').delay(3500).fadeIn(1000);
 
     }; // end of $gameWelcome()
 
