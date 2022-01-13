@@ -79,8 +79,7 @@ h2 {
 }
 
 p {
-    font-size: 1.2em;
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
 p#disclaimer {
@@ -415,6 +414,27 @@ div#gameStats h3 {
         width: 100%;
     }
 
+    p,
+    input[type="color"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    input[type='button'],
+    select:focus,
+    textarea {
+    font-size: 16px;
+    }
+
 }
 
 @media (min-width: 40em) {
@@ -450,6 +470,26 @@ div#gameStats h3 {
         padding: 0px 4.2em;
     }
 
+    p, label,
+    input[type="color"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    input[type='button'],
+    select:focus,
+    textarea {
+    font-size: 1.2em;
+    }
 
 }
 
@@ -512,9 +552,21 @@ div#gameStats h3 {
     cursor: pointer; /* Add a pointer on hover */
   }
 
-/* @media (min-width: 90em) {
-    .pagelayout {
-        grid-template-columns: 1fr 1fr;
-        height: 80vh;
-    }
-} */
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+  font-size: 16px;
+}
