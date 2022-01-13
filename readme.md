@@ -67,6 +67,23 @@ And I am working on making it able to be played over the network but have not ye
 
 ## **Known Bugs**
 
+There are no known bugs, but there are features that are yet to be introduced. See WishList.
+
 ## **Tech Used**
 
+The program uses HTML, CSS, JavaScript and the jQuery library.
+
 ## **WishList**
+
+### Overall
+
+- Add mutliplayer functionality
+
+### Character Creation
+
+- Collect more information so it can build funnier responses at the end e.g. hobbies, favourite color (could change game board piece hover)
+
+### Results
+
+- Add sharing buttons when results are given so that users can send to others to play together
+- Actually have the astrological score and the zodiac score combine and provide a more intelligent response

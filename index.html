@@ -38,9 +38,10 @@
             </div>
         <label for="playerName">Who is the first brave soul:</label>
         <div class="spacer"></div>
-        <input id='nameInput' name="playerName" type="text" placeholder="Your name here" required>
-        <input id='nameSubmit' type="button" value="Submit">
+        <input id='nameInput' name="playerName" type="text" placeholder="Your name here">
+        <input id='nameSubmit' type="button" value="Submit" disabled>
         <div class="spacer"></div>
+        <p id='warning'></p>
         <div class="spacer"></div>
     
     </div>
@@ -53,10 +54,11 @@
             <label for="playerDOB">Your birthdate:</label>
             <div class="spacer"></div>
     
-            <form>
                 <input id='dobInput' name="playerDOB" type="date" required>
-                <input id='dobSubmit' type="button" value="Submit">
-            </form>
+                <input id='dobSubmit' type="button" value="Submit" disabled>
+                <div class="spacer"></div>
+                <p id='dobWarning'></p>
+                <div class="spacer"></div>
         
         </div>
         

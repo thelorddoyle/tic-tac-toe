@@ -78,6 +78,18 @@ h2 {
     padding-bottom: 20px;
 }
 
+#warning {
+    font-size: 0.9em;
+}
+
+.nameNotLongEnough {
+    color: red;
+}
+
+.nameIsGood {
+    color: green;
+}
+
 p {
     line-height: 1.4;
 }
@@ -270,6 +282,10 @@ div#resultsGrid {
     padding: 40px;
     margin-bottom: 40px;
     border: 5px solid var(--primary-color);
+}
+
+#nameSubmit, #dobSubmit {
+    pointer-events: none;
 }
 
 #nameSubmit, #nameInput, #dobSubmit, #dobInput {

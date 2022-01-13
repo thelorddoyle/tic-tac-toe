@@ -33,30 +33,103 @@ $( document ).ready(function() {
 
     }; // end of $gameWelcome()
 
-    // FIXME: Turn this on to remake game correctly
+    // FIXME:TODO: Turn this on to remake game correctly
     $gameWelcome();
 
-    // makes both the CharCreation buttons 'enter'-able
+    // jQuery validation for the nameInput
+    $('#nameInput').on('change', function() {
+
+        // helper function to just enable the nameInput button to work
+        function enableButton () {
+
+            // stops people entering only 2 letters for a name
+            if (document.querySelector('#nameInput').value.length >= 3) {
+
+                // this addClass turns text green, the HTML changes the message for the user, the removeAttr makes button submittable and pointer events makes it clickable
+                $('#warning').addClass('nameIsGood')
+                $('#warning').html('That name looks great!')
+                $('#nameSubmit').removeAttr("disabled")
+                $('#nameSubmit').css({'pointer-events': 'auto'})
+
+            } else {
+
+                $('#nameSubmit').attr("disabled")
+                $('#nameSubmit').css({'pointer-events': 'none'})
+                $('#warning').addClass('nameNotLongEnough')
+                $('#warning').removeClass('nameIsGood')
+                $('#warning').html('Needs more than 3 letters.')
+
+            }
+            
+        }
+        const enabler = document.querySelector('#nameInput');
+        enabler.addEventListener('input', enableButton()) 
+    })
+
+    // makes both the CharCreation buttons 'enter'-able only if the length of the name is longer than 3
     $('#nameInput').keypress(function (e) {
 
         if (e.keyCode==13) {
-            $('#nameSubmit').click();
+            if (document.querySelector('#nameInput').value.length >= 3) {
+                $('#nameSubmit').removeAttr("disabled")
+                $('#nameSubmit').click()
+            };
         }
 
     });
+
+
+    $('#dobInput').on('change', function() {
+
+        // enabls the button after performing validation and gives a message to help users navigate the form
+        function enableButton () {
+
+            // I decided only 13 year olds and above should be playing the game, and that anyone older than 120 is probably a fake account
+            if (document.querySelector('#dobInput').value.split('-')[0] > 1900 && document.querySelector('#dobInput').value.split('-')[0] < 2010) {
+
+                // this addClass turns text green, the HTML changes the message for the user, the removeAttr makes button submittable and pointer events makes it clickable
+                $('#dobWarning').addClass('nameIsGood')
+                $('#dobWarning').html('Date looks good!')
+                $('#dobSubmit').removeAttr("disabled")
+                $('#dobSubmit').css({'pointer-events': 'auto'})
+
+            } else {
+
+                $('#dobSubmit').attr("disabled")
+                $('#dobSubmit').css({'pointer-events': 'none'})
+                $('#dobWarning').addClass('nameNotLongEnough')
+                $('#dobWarning').removeClass('nameIsGood')
+                $('#dobWarning').html(`That is a ridiculous date! Try again. Do you think I'm stupid?`)
+
+            }
+            
+        }
+        const enabler = document.querySelector('#dobInput');
+        enabler.addEventListener('input', enableButton()) 
+    })
+
+
     $('#dobInput').keypress(function (e) {
 
         if (e.keyCode==13) {
-            $('#dobSubmit').click();
+            if (document.querySelector('#dobInput').value.split('-')[0] > 1900 && document.querySelector('#dobInput').value.split('-')[0] < 2010) {
+                $('#dobSubmit').click();
+            }
+            
         }
 
     });
 
-    // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
+    // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB. 
     $('#nameSubmit').on('click', function () {
 
         // this just clears the DOB form for player 2 when they go to enter it
         $('input#dobInput').val('');
+
+        // resets the button enablement for the nameInput (which is reused for player 2) and disabling pointer events again
+        $('#dobWarning').html('')
+        $('#dobSubmit').attr("disabled")
+        $('#dobSubmit').css({'pointer-events': 'none'})
 
         // whoseturn simply finds out if this is player 1 or player 2 entering their name by working out how many times this tracker has ticked up (or at all)
         if (whoseturn === 1) {
@@ -92,6 +165,11 @@ $( document ).ready(function() {
 
         // this is going to set their DOB as a local variable
         let dob = $(this).prev().val();
+
+        // resets the button enablement for the nameInput (which is reused for player 2) and disabling pointer events again
+        $('#warning').html('')
+        $('#nameSubmit').attr("disabled")
+        $('#nameSubmit').css({'pointer-events': 'none'})
         
         // this is actually going to do quite a lot! This is if it is player 1:
         if (whoseturn === 1) {
