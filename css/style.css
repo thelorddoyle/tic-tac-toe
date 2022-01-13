@@ -196,7 +196,7 @@ a.navlink {
 }
 
 a.navlink:hover {
-    color: var(--tertiary-color);
+    color: var(--quaternary-color);
     text-decoration: underline;
 }
 
