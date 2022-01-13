@@ -314,6 +314,7 @@ h3 {
 }
 
 h3#winner-message {
+    font-size: 1.4em;
     color: var(--primary-color);
 }
 
@@ -431,8 +432,9 @@ div#gameStats h3 {
     input[type="week"],
     input[type='button'],
     select:focus,
-    textarea {
-    font-size: 16px;
+    textarea 
+    {
+        font-size: 16px;
     }
 
 }
@@ -485,10 +487,14 @@ div#gameStats h3 {
     input[type="time"],
     input[type="url"],
     input[type="week"],
-    input[type='button'],
     select:focus,
-    textarea {
-    font-size: 1.2em;
+    textarea 
+    {
+        font-size: 1.2em;
+    }
+
+    input[type='button'] {
+        font-size: 1.1em;
     }
 
 }

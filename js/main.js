@@ -23,7 +23,7 @@ let boringResult = '';
 
 $( document ).ready(function() {
 
-    console.log( "document ready!" );
+    // console.log( "document ready!" );
 
     // this is just the Initial Fade In of the title and then the name form
     const $gameWelcome = function () {
@@ -35,6 +35,22 @@ $( document ).ready(function() {
 
     // FIXME: Turn this on to remake game correctly
     $gameWelcome();
+
+    // makes both the CharCreation buttons 'enter'-able
+    $('#nameInput').keypress(function (e) {
+
+        if (e.keyCode==13) {
+            $('#nameSubmit').click();
+        }
+
+    });
+    $('#dobInput').keypress(function (e) {
+
+        if (e.keyCode==13) {
+            $('#dobSubmit').click();
+        }
+
+    });
 
     // This is when the Tic-Tac-Zodiac NAME FORM shows up. It is asking for the players name before they enter their DOB.
     $('#nameSubmit').on('click', function () {
@@ -124,6 +140,7 @@ $( document ).ready(function() {
     // this function really only turns their DOB string array in to an actual numbered array for later use. This is a helper function.
     const playerDOBFunction = function(player) {
 
+        // this turns the array of strings in to arrays of number so getSign works
         if (player === 'player1') {
             player1dob = player1dobStringArray.map(Number);
 
@@ -1156,11 +1173,11 @@ $( document ).ready(function() {
 
         },    
 
+        // helper function that just puts the star sign in lower case so it can be checked against the object
         compatibilityCheck: function () {
+            
             player1starSign = getSign('player1').toLowerCase()
             player2starSign = getSign('player2').toLowerCase()
-            console.log('player 1 star sign: ', player1starSign)
-            console.log('player 2 star sign: ', player2starSign)
         },
     
     };
