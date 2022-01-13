@@ -30,6 +30,7 @@ $( document ).ready(function() {
 
         $('#charCreationTitle').fadeIn(2000).fadeOut(1000);
         $('#nameDiv').delay(3500).fadeIn(1000);
+        window.scrollTo(0, 0)
 
     }; // end of $gameWelcome()
 

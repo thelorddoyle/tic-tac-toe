@@ -78,6 +78,7 @@ The program uses HTML, CSS, JavaScript and the jQuery library.
 ### Overall
 
 - Add mutliplayer functionality
+- Add in LocalStorage
 
 ### Character Creation
 
