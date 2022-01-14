@@ -77,14 +77,25 @@ The program uses HTML, CSS, JavaScript and the jQuery library.
 
 ### Overall
 
-- Add mutliplayer functionality
+- Add mutliplayer functionality (Firebase)
 - Add in LocalStorage
+- Tidy up code and separate business logic, DOM manipulation and the different sections of CSS
 
 ### Character Creation
 
 - Collect more information so it can build funnier responses at the end e.g. hobbies, favourite color (could change game board piece hover)
 
+### Gameplay
+
+- Add an AI option for 1-player & use minimax to maximise the ability of the AI with a game state (note: columns in to rows, use **.every**, **sum**, **reduce**, **include** and **map**)
+- Have different abilities for the AI: easy, medium, hard
+- Add in logo on game board hover again (lost this earlier)
+
 ### Results
 
 - Add sharing buttons when results are given so that users can send to others to play together
 - Actually have the astrological score and the zodiac score combine and provide a more intelligent response
+
+### Back-end
+
+- Build in testing
