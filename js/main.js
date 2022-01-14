@@ -82,7 +82,7 @@ $( document ).ready(function() {
 
     $('#dobInput').on('change', function() {
 
-        // enabls the button after performing validation and gives a message to help users navigate the form
+        // enables the button after performing validation and gives a message to help users navigate the form
         function enableButton () {
 
             // I decided only 13 year olds and above should be playing the game, and that anyone older than 120 is probably a fake account
@@ -159,6 +159,7 @@ $( document ).ready(function() {
 
         // the chooseLogo section is where they submit their DOB
         $('#chooseLogo').delay(750).fadeIn(1000);
+        window.scrollTo(0, 0)
     }; // end of sayHelloToName()
 
     // This is the form that turns up asking players for their DOB. It is going to set the players DOB as a string and begin the next few functions
@@ -205,6 +206,7 @@ $( document ).ready(function() {
 
         // reset the name form for player 2
         $('#nameInput').val('');
+        window.scrollTo(0, 0)
 
         // move on to the player 2 section of Character Creation
         $('#howItWorks').css({'display': 'none'});
