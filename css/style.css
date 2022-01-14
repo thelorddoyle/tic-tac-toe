@@ -150,6 +150,7 @@ div#gameStatGrid {
 }
 
 #displayAds {
+    margin-top: 50px;
     display: grid;
     text-align: center;
     justify-content: center;
