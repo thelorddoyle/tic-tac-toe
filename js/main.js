@@ -1371,11 +1371,13 @@ $( document ).ready(function() {
             // showing & hiding the correct pages to show results
             $('#gameBoard').fadeOut(1000);
             $('#resultsGrid').toggle();
+            window.scrollTo(0, 0)
             $('#resultsGrid').css({
                 'display': 'grid'
             });
             $('#loadingOfResults').delay(1000).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500).fadeIn(500).fadeOut(500);
             $('#firstResultsScreen').delay(4500).fadeIn(1000);
+            window.scrollTo(0, 0)
 
         };
 
@@ -1385,7 +1387,9 @@ $( document ).ready(function() {
     $('input#tictactoeResults').on('click', function () {
 
         $('#firstResultsScreen').fadeOut(1000)
+        window.scrollTo(0, 0)
         $('#secondResultScreen').delay(1000).fadeIn(1000)
+        window.scrollTo(0, 0)
 
     } )
         
