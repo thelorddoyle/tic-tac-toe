@@ -28,7 +28,9 @@ $( document ).ready(function() {
     // this is just the Initial Fade In of the title and then the name form
     const $gameWelcome = function () {
 
+        window.scrollTo(0, 0)
         $('#charCreationTitle').fadeIn(2000).fadeOut(1000);
+        window.scrollTo(0, 0)
         $('#nameDiv').delay(3500).fadeIn(1000);
         window.scrollTo(0, 0)
 
